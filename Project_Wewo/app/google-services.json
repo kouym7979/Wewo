@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1081047722997",
+    "firebase_url": "https://wewo-77914.firebaseio.com",
+    "project_id": "wewo-77914",
+    "storage_bucket": "wewo-77914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081047722997:android:99da74c79a4ec726edcebc",
+        "android_client_info": {
+          "package_name": "com.example.project_wewo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081047722997-u5q5qieiqn3glq7o83s0614sntpe6k12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvIRz4B_SuyKT5YvLZXNTYMpC_oLamsNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081047722997-u5q5qieiqn3glq7o83s0614sntpe6k12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
