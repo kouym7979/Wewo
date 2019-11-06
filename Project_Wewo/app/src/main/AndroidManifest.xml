@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MemberRegisterActivity"
+            android:label="MemberRegisterActivity"   >
+
+        </activity>
+        <activity
             android:name=".Main_home"
             android:label="@string/title_activity_main_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
