@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_wewo.Main_home;
+import com.example.project_wewo.MemberRegisterActivity;
 import com.example.project_wewo.R;
 import com.example.project_wewo.ui.login.LoginViewModel;
 import com.example.project_wewo.ui.login.LoginViewModelFactory;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-
+        final Button registerButton = findViewById(R.id.register); //레지스터 버튼
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -123,6 +124,17 @@ public class LoginActivity extends AppCompatActivity {
                startActivity(intent);
             }
         });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rintent= new Intent(
+                        getApplicationContext(),
+                        MemberRegisterActivity.class);
+                startActivity(rintent);
+            }
+        });
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
