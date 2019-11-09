@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+<<<<<<< HEAD
             android:name=".MemberRegisterActivity"
             android:label="MemberRegisterActivity"></activity>
         <activity
+=======
+>>>>>>> parent of dcea185... Merge branch 'master' into kyw
             android:name=".Main_home"
             android:label="@string/title_activity_main_home"
             android:theme="@style/AppTheme.NoActionBar" />

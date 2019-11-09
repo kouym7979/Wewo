@@ -25,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_wewo.Main_home;
-import com.example.project_wewo.MemberRegisterActivity;
 import com.example.project_wewo.R;
 import com.example.project_wewo.ui.login.LoginViewModel;
 import com.example.project_wewo.ui.login.LoginViewModelFactory;
@@ -53,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final EditText passwordEditText = findViewById(R.id.password);
         //final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+<<<<<<< HEAD
         //final Button registerButton = findViewById(R.id.register); //레지스터 버튼
 
         //loginButton.setOnClickListener(this);
@@ -62,6 +62,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         PW=passwordEditText.getText().toString();
 
        /* loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
+=======
+
+        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
+>>>>>>> parent of dcea185... Merge branch 'master' into kyw
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
                 if (loginFormState == null) {
@@ -128,6 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+<<<<<<< HEAD
 
 
        /* registerButton.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +148,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+=======
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* loadingProgressBar.setVisibility(View.VISIBLE);
+                loginViewModel.login(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());*/
+               Intent intent= new Intent(
+                    getApplicationContext(),
+                       Main_home.class);
+               startActivity(intent);
+            }
+        });
+>>>>>>> parent of dcea185... Merge branch 'master' into kyw
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
