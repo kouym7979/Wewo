@@ -47,16 +47,16 @@
                 android:id="@+id/textView3"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
-                android:text="ID : " />
+                android:text="Email : " />
 
             <EditText
-                android:id="@+id/et_Id"
+                android:id="@+id/et_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="아이디 입력" />
+                android:inputType="textEmailAddress"
+                android:hint="E-mail" />
 
         </LinearLayout>
 
@@ -80,8 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="비밀번호 입력" />
+                android:inputType="textPassword"
+                android:hint="비밀번호 입력" />
 
         </LinearLayout>
 
@@ -105,8 +105,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="비밀번호 재입력" />
+                android:inputType="textPassword"
+                android:hint="비밀번호 재입력" />
 
         </LinearLayout>
 

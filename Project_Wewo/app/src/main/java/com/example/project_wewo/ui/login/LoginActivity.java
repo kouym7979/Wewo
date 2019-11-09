@@ -2,6 +2,7 @@ package com.example.project_wewo.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -28,10 +29,18 @@ import com.example.project_wewo.MemberRegisterActivity;
 import com.example.project_wewo.R;
 import com.example.project_wewo.ui.login.LoginViewModel;
 import com.example.project_wewo.ui.login.LoginViewModelFactory;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginViewModel loginViewModel;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();//파이어베이스 선언
+    String Email, PW;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,10 +51,17 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
+        //final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-        final Button registerButton = findViewById(R.id.register); //레지스터 버튼
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
+        //final Button registerButton = findViewById(R.id.register); //레지스터 버튼
+
+        //loginButton.setOnClickListener(this);
+        findViewById(R.id.login).setOnClickListener(this);
+        findViewById(R.id.register).setOnClickListener(this);
+        Email=usernameEditText.getText().toString();
+        PW=passwordEditText.getText().toString();
+
+       /* loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
                 if (loginFormState == null) {
@@ -60,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+*/
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
@@ -112,20 +128,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               /* loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());*/
-               Intent intent= new Intent(
-                    getApplicationContext(),
-                       Main_home.class);
-               startActivity(intent);
-            }
-        });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+
+       /* registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent rintent= new Intent(
@@ -133,7 +138,10 @@ public class LoginActivity extends AppCompatActivity {
                         MemberRegisterActivity.class);
                 startActivity(rintent);
             }
-        });
+        });*/
+
+
+
 
     }
 
@@ -145,5 +153,38 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.login:
+                mAuth.signInWithEmailAndPassword(Email, PW)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LoginActivity.this,Main_home.class));//성공하면 홈화면으로 이동
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(LoginActivity.this, "Login error.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                                // ...
+                            }
+                        });
+                break;
+            case R.id.register:
+                Intent rintent= new Intent(
+                        getApplicationContext(),
+                        MemberRegisterActivity.class);
+                startActivity(rintent);
+                break;
+
+        }
     }
 }
