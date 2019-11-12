@@ -1,3 +1,6 @@
+# project commit note
+
+
 add: 새로운 코드 추가할 경우
 
 delete:기존의 코드 삭제하는 경우
