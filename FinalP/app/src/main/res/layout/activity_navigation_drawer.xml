@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
+    <!--fitsSystemWindows는 뷰영역을 핸드폰의 맨꼭대기 까지확장해줄지말지를 결정 -->
     <include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"

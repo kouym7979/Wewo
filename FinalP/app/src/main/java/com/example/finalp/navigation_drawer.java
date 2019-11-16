@@ -28,14 +28,14 @@ public class navigation_drawer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation_drawer);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        setContentView(R.layout.activity_navigation_drawer); //화면전환
+        Toolbar toolbar = findViewById(R.id.toolbar); //툴바 객체 생성 , 툴바사용법 : https://recipes4dev.tistory.com/149
+        setSupportActionBar(toolbar); //액션바를 툴바로 설정
+        FloatingActionButton fab = findViewById(R.id.fab); // 편지모양 버튼객체
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            public void onClick(View view) { //편지모양 버튼객체가 눌리면 수행될 동작
+                Snackbar.make(view, "wewo프로젝트는 성공할 수 있나요?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
