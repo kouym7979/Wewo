@@ -34,7 +34,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        currentUser = mAuth.getCurrentUser();
+       if(currentUser!=null)
+       {
+           startActivity(new Intent(this,nav.class));
+           finish();
+       }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -69,6 +79,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
+
 }
 
 
