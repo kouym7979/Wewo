@@ -14,7 +14,6 @@ import com.example.finalp.R;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-
     private List<Post> datas;
 
     public PostAdapter(List<Post> datas) {//어댑터에 대한 생성자
