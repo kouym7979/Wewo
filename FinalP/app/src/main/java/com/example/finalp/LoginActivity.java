@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
     }
+    //자동로그인 기능 주석해제하면 로그인 풀림
+    /*
     @Override
     public void onStart() {
         super.onStart();
@@ -45,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
            finish();
        }
     }
+
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){

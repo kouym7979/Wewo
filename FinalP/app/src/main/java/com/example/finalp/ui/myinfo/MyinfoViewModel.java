@@ -1,16 +1,16 @@
-package com.example.finalp.ui.maker;
+package com.example.finalp.ui.myinfo;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class MyinfoViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public MyinfoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+        mText.setValue("내정보 페이지 입니다.");
     }
 
     public LiveData<String> getText() {

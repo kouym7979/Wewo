@@ -50,7 +50,7 @@ public class nav extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_notice, R.id.nav_license,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_settings, R.id.nav_myinfo, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
 
