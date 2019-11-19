@@ -1,8 +1,10 @@
 package com.example.finalp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,11 +22,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         this.datas = datas;
     }
 
-    @NonNull
+   /* @NonNull
     @Override//밑에 메소드들은 그냥 implement method한거입니다. 해야한대요
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post,parent,false));
-    }
+        Context context =parent.getContext();
+        LayoutInflater inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.item_post,parent,false);
+        //PostViewHolder
+        //return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post,parent,false));
+    }*/
+   @Override
+   public PostAdapter.PostViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+       Context context =parent.getContext();
+       LayoutInflater inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+       View view = inflater.inflate(R.layout.item_post,parent,false);
+       PostAdapter.PostViewHolder ph=new PostAdapter.PostViewHolder(view);
+       return ph;
+   }
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {

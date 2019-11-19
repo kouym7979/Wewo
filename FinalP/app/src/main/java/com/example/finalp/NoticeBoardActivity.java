@@ -36,6 +36,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     private PostAdapter mAdapter;
     private List<Post> mDatas;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
