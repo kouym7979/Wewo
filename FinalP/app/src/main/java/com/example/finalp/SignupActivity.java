@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText sEmail, sNickname, sPw,sPw_chk;
+    private EditText sEmail, sPw,sPw_chk;  //nickname 주석
     private FirebaseAuth mAuth =FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     @Override
@@ -30,7 +30,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_signup);
 
         sEmail=findViewById(R.id.semail);
-        sNickname =findViewById(R.id.snickname);
+        //sNickname =findViewById(R.id.snickname);
         sPw=findViewById(R.id.spw);
         sPw_chk=findViewById(R.id.spw_chk);
         findViewById(R.id.btn_signup).setOnClickListener(this);
@@ -51,7 +51,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 //FirebaseID란 클래스를 추가로 만들어서 private public string 형식으로 id,pw 값을 저장하는 클래스 생성
                                 userMap.put(FirebaseID.documentId, user.getUid());//email받을까
                                 userMap.put(FirebaseID.email, sEmail.getText().toString());//고유아이디 설정 해줌
-                                userMap.put(FirebaseID.nickname,sNickname.getText().toString());
+                                //userMap.put(FirebaseID.nickname,sNickname.getText().toString());
                                 userMap.put(FirebaseID.password, sPw.getText().toString());//pw받고
                                 //mStore.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
                                 mStore.collection("users")//users라는 테이블에 데이터를 넣는것
