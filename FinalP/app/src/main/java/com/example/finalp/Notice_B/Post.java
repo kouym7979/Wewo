@@ -8,16 +8,18 @@ public class Post {
     private String userId;//게시글 올린 사람
     private String title;//게시글 제목
     private String contents;//게시글 내용
+    private String p_nickname;//게시글 작성자 닉네임
     @ServerTimestamp
     private Date date;
     public Post() {//빈생성자 생성
 
    }
 
-    public Post(String userId, String title, String contents) {
+    public Post(String userId, String title, String contents) {//String p_nickname 잠시 보류
         this.userId = userId;
         this.title = title;
         this.contents = contents;
+        //this.p_nickname=p_nickname;
     }
     //alt+insert키르 누르면 클래스에 필요한 메소드 자동생성 가능
     public String getUserId() {
@@ -52,12 +54,22 @@ public class Post {
         this.date = date;
     }
 
+   /* public String getP_nickname() {
+        return p_nickname;
+    }
+
+    public void setP_nickname(String p_nickname) {
+        this.p_nickname = p_nickname;
+    }
+*/
     @Override
     public String toString() {
         return "Post{" +
                 "userId='" + userId + '\'' +
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
+               // ", p_nickname='" + p_nickname + '\'' +
+                ", date=" + date +
                 '}';
     }
 }

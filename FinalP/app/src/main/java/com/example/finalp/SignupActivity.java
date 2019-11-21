@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText sEmail, sPw,sPw_chk;
+    private EditText sEmail, sPw,sPw_chk,sNickname;
     private FirebaseAuth mAuth =FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     @Override
@@ -32,6 +32,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         sEmail=findViewById(R.id.semail);
         sPw=findViewById(R.id.spw);
         sPw_chk=findViewById(R.id.spw_chk);
+        sNickname=findViewById(R.id.snickname);
         findViewById(R.id.btn_signup).setOnClickListener(this);
 
     }
@@ -49,6 +50,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 Map<String, Object> userMap = new HashMap<>();//유저의 id,pw를 저장하기 위해 맵으로 선언
                                 //FirebaseID란 클래스를 추가로 만들어서 private public string 형식으로 id,pw 값을 저장하는 클래스 생성
                                 userMap.put(FirebaseID.documentId, user.getUid());//email받을까
+                                userMap.put(FirebaseID.nickname,sNickname.getText().toString());
                                 userMap.put(FirebaseID.email, sEmail.getText().toString());//고유아이디 설정 해줌
                                 userMap.put(FirebaseID.password, sPw.getText().toString());//pw받고
                                 //mStore.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
