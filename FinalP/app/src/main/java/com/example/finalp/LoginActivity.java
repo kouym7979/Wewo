@@ -34,9 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
     }
-    //자동로그인 기능 주석해제하면 로그인 풀림
-    /*
-    @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -46,17 +43,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
            startActivity(new Intent(this,nav.class));
            finish();
        }
-    }
-
-     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
-                Toast.makeText(LoginActivity.this,"Login success",Toast.LENGTH_SHORT).show();
                 String s_email=Em.getText().toString();
                 String s_pw=Pw.getText().toString();
-                loginStart(s_email,s_pw);
+                if(s_email ==null ||s_pw==null)
+                {
+                    Toast.makeText(LoginActivity.this,"Login Error",Toast.LENGTH_SHORT).show();
+                }
+
+                if(s_email!=null && s_pw!=null) {
+                    loginStart(s_email, s_pw);
+                }
                 break;
             case R.id.signup:
                 startActivity(new Intent(this,SignupActivity.class));
