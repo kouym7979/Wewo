@@ -19,7 +19,7 @@ public class Post {
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;
-        //this.p_nickname=p_nickname;
+        this.p_nickname=p_nickname;
     }
     //alt+insert키르 누르면 클래스에 필요한 메소드 자동생성 가능
     public String getDocumentId() {
@@ -54,21 +54,21 @@ public class Post {
         this.date = date;
     }
 
-   /* public String getP_nickname() {
+    public String getP_nickname() {
         return p_nickname;
     }
 
     public void setP_nickname(String p_nickname) {
         this.p_nickname = p_nickname;
     }
-*/
+
     @Override
     public String toString() {
         return "Post{" +
                 "documentId='" + documentId + '\'' +
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
-               // ", p_nickname='" + p_nickname + '\'' +
+                ", p_nickname='" + p_nickname + '\'' +
                 ", date=" + date +
                 '}';
     }
