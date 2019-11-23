@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
     }
-    /*@Override//자동로그인 함수
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -44,7 +43,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
            startActivity(new Intent(this,nav.class));
            finish();
        }
-    }*/
     @Override
     public void onClick(View v) {
         switch (v.getId()){

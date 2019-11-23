@@ -1,4 +1,4 @@
-package com.example.finalp.ui.tools;
+package com.example.finalp.ui.license;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.finalp.R;
 
-public class ToolsFragment extends Fragment {
+public class licenseFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private LicenseViewModel licenseViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
+        licenseViewModel =
+                ViewModelProviders.of(this).get(LicenseViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_license, container, false);
+        final TextView textView = root.findViewById(R.id.text_slideshow);
+        licenseViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
