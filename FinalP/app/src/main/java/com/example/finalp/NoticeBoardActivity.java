@@ -50,7 +50,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     protected void onStart() {
         super.onStart();
         mDatas = new ArrayList<>();//
-        mStore.collection(FirebaseID.post)
+        mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -62,7 +62,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                 String documentId=String.valueOf(shot.get(FirebaseID.documentId));
                                 String title=String.valueOf(shot.get(FirebaseID.title));
                                 String contents=String.valueOf(shot.get(FirebaseID.contents));
-                               // String p_nickname=String.valueOf(shot.get(FirebaseID.nickname));
+                                // String p_nickname=String.valueOf(shot.get(FirebaseID.nickname));
                                 Post data=new Post(documentId,title,contents);
                                 mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                             }
@@ -70,9 +70,9 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                             mPostRecyclerView.setAdapter(mAdapter);
                         }
                     }
-                });
-
+                }) ;
     }
+
 
     @Override
     public void onClick(View v) {

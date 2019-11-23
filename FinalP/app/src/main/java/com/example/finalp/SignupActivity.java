@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 userMap.put(FirebaseID.email, sEmail.getText().toString());//고유아이디 설정 해줌
                                 userMap.put(FirebaseID.password, sPw.getText().toString());//pw받고
                                 //mStore.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
-                                mStore.collection("users")//users라는 테이블에 데이터를 넣는것
+                                mStore.collection("UserInfo")//users라는 테이블에 데이터를 넣는것
                                         .add(user);
                                 finish();
                             } else {
