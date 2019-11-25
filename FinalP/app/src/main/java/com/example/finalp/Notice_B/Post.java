@@ -15,7 +15,7 @@ public class Post {
 
    }
 
-    public Post(String documentId, String title, String contents) {//String p_nickname 잠시 보류
+    public Post(String documentId, String title, String contents,String p_nickname) {//String p_nickname 잠시 보류
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;

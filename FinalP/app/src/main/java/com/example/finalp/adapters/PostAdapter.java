@@ -40,6 +40,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post data=datas.get(position);//Post라는 모델객체를 하나 만든 이유
+        holder.p_nickname.setText(datas.get(position).getP_nickname());
         holder.title.setText(datas.get(position).getTitle());//각각 데이터에 들어있는 제목 내용들이 각각 하나고 여러개가 아니기때문에
         holder.contents.setText(datas.get(position).getContents());//리스트로 만들어 주기 위해서
         //예를들면 첫째줄에 데이터에 위치를 각각 0번째 1번째...으로 받아서 그 위치마다 0번째 데이터위치에
@@ -57,12 +58,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         private TextView title;
         private TextView contents;
+        private TextView p_nickname;
 
         public PostViewHolder(@NonNull View itemView) {//포스트 뷰홀더의 생성자
             super(itemView);
 
             title=itemView.findViewById(R.id.post_title);
             contents=itemView.findViewById(R.id.post_contents);
+            p_nickname=itemView.findViewById(R.id.post_writer);
         }
     }
 }

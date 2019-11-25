@@ -19,7 +19,8 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+public class
+SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText sEmail, sPw, sPw_chk, sNickname;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
