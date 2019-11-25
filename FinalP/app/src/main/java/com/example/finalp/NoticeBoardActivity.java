@@ -62,8 +62,8 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                 String documentId=String.valueOf(shot.get(FirebaseID.documentId));
                                 String title=String.valueOf(shot.get(FirebaseID.title));
                                 String contents=String.valueOf(shot.get(FirebaseID.contents));
-                                // String p_nickname=String.valueOf(shot.get(FirebaseID.nickname));
-                                Post data=new Post(documentId,title,contents);
+                                String p_nickname=String.valueOf(shot.get(FirebaseID.nickname));
+                                Post data=new Post(documentId,title,contents,p_nickname);
                                 mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                             }
                             mAdapter = new PostAdapter(mDatas);//mDatas라는 생성자를 넣어줌
