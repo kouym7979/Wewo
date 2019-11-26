@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 public class
 SignupActivity extends AppCompatActivity implements View.OnClickListener {
-
+    TextView textView;
     private EditText sEmail, sPw, sPw_chk, sNickname;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
@@ -34,6 +35,7 @@ SignupActivity extends AppCompatActivity implements View.OnClickListener {
         sPw = findViewById(R.id.spw);
         sPw_chk = findViewById(R.id.spw_chk);
         sNickname = findViewById(R.id.snickname);
+        textView = (TextView) findViewById(R.id.textViewVerified);
         findViewById(R.id.btn_signup).setOnClickListener(this);
 
     }
@@ -43,10 +45,14 @@ SignupActivity extends AppCompatActivity implements View.OnClickListener {
         //비밀번호와 비밀번호 확인이 일치하고 이메일이 공란이 아닐때 조건을 추가해야함
         mAuth.createUserWithEmailAndPassword(sEmail.getText().toString(), sPw.getText().toString())
                 .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //if (sEmail!=null && sPw == sPw_chk) {//이메일 아이디를 입력하고 비밀번호와 비밀번호 확인이 일치하면 회원가입가능
                             if (task.isSuccessful()) {
+                                if(user.isEmailVerified()){
+                                    
+                                }
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Map<String, Object> userMap = new HashMap<>();//유저의 id,pw를 저장하기 위해 맵으로 선언

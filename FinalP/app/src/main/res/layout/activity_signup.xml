@@ -138,6 +138,12 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <TextView
+                android:id="@+id/textViewVerified"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verified" />
+
             <Button
                 android:id="@+id/btn_signup"
                 android:layout_width="wrap_content"
