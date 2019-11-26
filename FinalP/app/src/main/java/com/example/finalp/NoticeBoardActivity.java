@@ -52,7 +52,8 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .addSnapshotListener(
+                        new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         if(queryDocumentSnapshots !=null) {

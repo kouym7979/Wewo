@@ -51,10 +51,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                         }
                     });
         }
-
-
     }
-
     @Override
     public void onClick(View v) {
         if(mAuth.getCurrentUser()!=null){
