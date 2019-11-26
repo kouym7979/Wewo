@@ -44,7 +44,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
-                               // Log.d("비번","비밀번호:"+document.task.getResult().getData().get(FirebaseID.password));
+                                // Log.d("비번","비밀번호:"+document.task.getResult().getData().get(FirebaseID.password));
                                 p_nickname=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }

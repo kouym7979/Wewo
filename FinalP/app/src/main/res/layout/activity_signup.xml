@@ -55,7 +55,15 @@
                 android:inputType="textEmailAddress"
                 android:hint="E-mail" />
 
+            <Button
+                android:id="@+id/btn_duplicate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Duplicate Check" />
+
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="wrap_content"
