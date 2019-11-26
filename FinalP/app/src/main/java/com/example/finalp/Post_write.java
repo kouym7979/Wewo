@@ -45,15 +45,16 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.getResult()!=null){
+                            if(task.isSuccessful()){
                                 Log.d("확인","여기까지되나?여기 못들어오나");
                                 DocumentSnapshot document=task.getResult();
-                                //Log.d("닉네임","nickname:"+task.getResult().getData().get(FirebaseID.nickname));
-                            //   p_nickname=(String)document.getData().get(FirebaseID.nickname);//이부분이 안되네
+                                Log.d("닉네임","nickname:"+task.getResult().getData().get(FirebaseID.nickname));
+                                p_nickname=(String)document.getData().get(FirebaseID.nickname);//이부분이 안되네
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }
                         }
                     });
+
 
         }
 
