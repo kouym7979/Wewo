@@ -18,6 +18,10 @@ Wewo (외국인과 한국인 소통 커뮤니티 앱 만들기)
 * 안드로이드와 파이어베이스 store연동   
 * Login and SignUp 레이아웃과 기능 구현 완료   
 * 회원가입된 정보를 토대로 로그인 가능   
+* Navigation Drawer을 이용한 UI & UX 구조 개선
+* Post 레이아웃과 기능 구현완료 
+* 가입된 이메일을 통해 이메일 인증 구현완료
+* 게시글 작성기능 구현완료
 
 ## WEWO Project Commit Note
 [커밋 마크노트](https://github.com/kouym7979/Wewo/blob/master/md_files/project%20commit%20note.md#project-commit-note)
