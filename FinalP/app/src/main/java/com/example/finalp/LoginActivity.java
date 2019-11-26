@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
     }
-    @Override
+    @Override//자동로그인 함수
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -49,10 +49,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
-                Toast.makeText(LoginActivity.this,"Login success",Toast.LENGTH_SHORT).show();
                 String s_email=Em.getText().toString();
                 String s_pw=Pw.getText().toString();
-                loginStart(s_email,s_pw);
+                if(s_email ==null ||s_pw==null)
+                {
+                    Toast.makeText(LoginActivity.this,"Login Error",Toast.LENGTH_SHORT).show();
+                }
+
+                if(s_email!=null && s_pw!=null) {
+                    loginStart(s_email, s_pw);
+                }
                 break;
             case R.id.signup:
                 startActivity(new Intent(this,SignupActivity.class));
@@ -68,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this,"mAuth. onComplete 함수" ,Toast.LENGTH_SHORT).show();
                 if (!task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this,"Login error",Toast.LENGTH_SHORT).show();
-                    
+
                 }else{
                     currentUser = mAuth.getCurrentUser();
                     Toast.makeText(LoginActivity.this, "로그인 성공" + "/" + currentUser.getEmail() + "/" + currentUser.getUid() ,Toast.LENGTH_SHORT).show();
@@ -82,6 +88,3 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 }
-
-
-
