@@ -55,7 +55,15 @@
                 android:inputType="textEmailAddress"
                 android:hint="E-mail" />
 
+            <Button
+                android:id="@+id/btn_duplicate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Duplicate Check" />
+
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="wrap_content"
@@ -137,12 +145,6 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp">
-
-            <TextView
-                android:id="@+id/textViewVerified"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Verified" />
 
             <Button
                 android:id="@+id/btn_signup"
