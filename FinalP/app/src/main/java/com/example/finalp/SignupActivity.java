@@ -56,8 +56,8 @@ SignupActivity extends AppCompatActivity implements View.OnClickListener {
                                 userMap.put(FirebaseID.email, sEmail.getText().toString());//로그인에 사용할 email 아이디
                                 userMap.put(FirebaseID.password, sPw.getText().toString());//pw받고
                                 //mStore.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
-                                mStore.collection("UserInfo")//users라는 테이블에 데이터를 넣는것
-                                        .add(userMap);
+                                mStore.collection(FirebaseID.user).document(user.getUid()).set(userMap,SetOptions.merge());//
+                                //user라는 테이블에 값을 넣고 각 필드에 해당하는 값들중에 같더라도 올라가게함
                                 finish();
                            // }
                         } else {
