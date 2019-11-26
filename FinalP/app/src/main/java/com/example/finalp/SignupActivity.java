@@ -42,6 +42,7 @@ SignupActivity extends AppCompatActivity{
         sNickname = findViewById(R.id.snickname);
 
 
+
         //ID 중복 체크 버튼 구현
         duplicate_button = (Button) findViewById(R.id.btn_duplicate) ;
         duplicate_button.setOnClickListener(new Button.OnClickListener() {
@@ -112,7 +113,6 @@ SignupActivity extends AppCompatActivity{
             }
 
         });
-
     }
 
 
