@@ -30,6 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class nav extends AppCompatActivity {
     private Button verified_button;
     private TextView textview_nickname;
     private TextView textview_email;
+    private ImageButton photo_button;
     private FirebaseAuth Auth = FirebaseAuth.getInstance();
     private String pp;
     @Override
@@ -79,6 +81,15 @@ public class nav extends AppCompatActivity {
                     });
         }
 
+        //사진 삽입 버튼 구현
+        photo_button = (ImageButton)findViewById(R.id.btn_photo);
+        photo_button.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void OnClick(View view){
+                Filechooser();
+            }
+        });
+        
         //이메일 인증 버튼 구현
         verified_button = (Button) header.findViewById(R.id.btn_verified) ;
         if(user.isEmailVerified()){
