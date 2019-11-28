@@ -61,7 +61,7 @@
             android:text="국적 :" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/myinfo_nation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp" />

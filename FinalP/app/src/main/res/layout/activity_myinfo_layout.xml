@@ -61,7 +61,7 @@
             android:text="국적 :" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/myinfo_nation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp" />
@@ -86,6 +86,13 @@
             android:layout_height="110dp"
             android:layout_marginLeft="20dp"
             app:srcCompat="@android:drawable/btn_star_big_on" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button" />
 
     </LinearLayout>
 

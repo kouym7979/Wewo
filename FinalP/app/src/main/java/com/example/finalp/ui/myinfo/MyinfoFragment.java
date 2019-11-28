@@ -31,6 +31,7 @@ public class MyinfoFragment extends Fragment {
     private String nick;
     private TextView myinfoNickname;
     private TextView myinfoEmail;
+    private TextView myinfoNation;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +41,11 @@ public class MyinfoFragment extends Fragment {
         myinfoNickname = (TextView)root.findViewById(R.id.myinfo_nickname) ;
         myinfoEmail = (TextView)root.findViewById(R.id.myinfo_email) ;
 
+        myinfoNation = (TextView)root.findViewById(R.id.myinfo_nation);
+
         FirebaseUser user= mAuth.getCurrentUser();
         myinfoEmail.setText(user.getEmail().toString());
+
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())
                     .get()
@@ -53,6 +57,8 @@ public class MyinfoFragment extends Fragment {
                                 //pp=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 myinfoNickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
                                 //파이어베이스에 등록된 닉네임을 불러옴
+
+                                myinfoNation.setText((String)task.getResult().getData().get(FirebaseID.nation));
                             }
                         }
                     });

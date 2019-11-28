@@ -17,7 +17,9 @@ public class myinfo_layout extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private String nickname;
+    private String nation;
     private TextView t_nick;
+    private TextView t_nation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class myinfo_layout extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
                                 nickname=(String)task.getResult().getData().get(FirebaseID.nickname);//
+                                nation= (String) task.getResult().getData().get(FirebaseID.nation);
                                 //닉네임 뿐만아니라 여기서 FirebaseID.password를 하면 비밀번호도 받아올 수 있음. 즉 원하는 것을 넣으면 됨
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }
@@ -44,5 +47,6 @@ public class myinfo_layout extends AppCompatActivity {
                     });
         }
         t_nick.setText(nickname);
+        t_nation.setText(nation);
     }
 }
