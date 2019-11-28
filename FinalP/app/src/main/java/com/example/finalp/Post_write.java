@@ -38,27 +38,20 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.Post_save).setOnClickListener(this);
 
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
-            Toast.makeText(Post_write.this,"여기까지는됨",Toast.LENGTH_SHORT).show();
-            Log.d("확인","여기까지되나?");
-            mStore.collection("UserInfo").document(mAuth.getCurrentUser().getUid())
+            mStore.collection("user").document(mAuth.getCurrentUser().getUid())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
-                                Log.d("확인","여기까지되나?여기 못들어오나");
-                                DocumentSnapshot document=task.getResult();
-                                //Log.d("닉네임","nickname:"+task.getResult().getData().get(FirebaseID.nickname));
-                            //   p_nickname=(String)document.getData().get(FirebaseID.nickname);//이부분이 안되네
+                                // Log.d("비번","비밀번호:"+document.task.getResult().getData().get(FirebaseID.password));
+                                p_nickname=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }
                         }
                     });
-
         }
-
     }
-
     @Override
     public void onClick(View v) {
         if(mAuth.getCurrentUser()!=null){

@@ -7,13 +7,11 @@ public class UserInfo {
     private String nickname;//게시글 제목
     private String email;//게시글 내용
     private String password;//게시글 작성자 닉네임
-    private String pp;
+
     public UserInfo(){//빈생성자
 
     }
-
-   
-    public UserInfo(String documentId, String email, String nickname, String password) {
+    public UserInfo(String documentId, String email,String nickname, String password) {
         this.documentId=documentId;
         this.email=email;
         this.nickname=nickname;
