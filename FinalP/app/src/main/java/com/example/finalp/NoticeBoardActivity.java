@@ -44,6 +44,8 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
 
         mPostRecyclerView = findViewById(R.id.recyclerview);
         findViewById(R.id.edit_button).setOnClickListener(this);
+        //findViewById(R.id.recyclerview)
+
     }
 
     @Override
