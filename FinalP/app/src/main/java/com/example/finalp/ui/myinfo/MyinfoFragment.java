@@ -1,7 +1,9 @@
 package com.example.finalp.ui.myinfo;
 
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+
 import com.example.finalp.FirebaseID;
 import com.example.finalp.R;
 import com.google.android.gms.auth.api.Auth;
@@ -23,9 +26,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.example.finalp.R;
+
+
 public class MyinfoFragment extends Fragment {
 
     private MyinfoViewModel myinfoViewModel;
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private String nick;
@@ -33,11 +40,14 @@ public class MyinfoFragment extends Fragment {
     private TextView myinfoEmail;
     private TextView myinfoNation;
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         myinfoViewModel =
                 ViewModelProviders.of(this).get(MyinfoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_myinfo, container, false);
+
         myinfoNickname = (TextView)root.findViewById(R.id.myinfo_nickname) ;
         myinfoEmail = (TextView)root.findViewById(R.id.myinfo_email) ;
 
@@ -65,6 +75,15 @@ public class MyinfoFragment extends Fragment {
         }
 
 
+
+
+        final TextView textView = root.findViewById(R.id.text_myinfo);
+        myinfoViewModel.getText().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+            }
+        });
 
         return root;
     }
