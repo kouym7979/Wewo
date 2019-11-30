@@ -24,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-
 import com.example.finalp.FirebaseID;
 import com.example.finalp.R;
 import com.google.android.gms.auth.api.Auth;
@@ -43,11 +42,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-
 import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
+
 public class MyinfoFragment extends Fragment{
+
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private String nick;
@@ -66,14 +68,13 @@ public class MyinfoFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_myinfo, container, false);
-
         myinfoNickname = (TextView)root.findViewById(R.id.myinfo_nickname) ;
         myinfoEmail = (TextView)root.findViewById(R.id.myinfo_email) ;
         photo_button = (Button)root.findViewById(R.id.btn_photo);
         myinfoimageView = (ImageView)root.findViewById(R.id.imgv_photo);
         progressBar = root.findViewById(R.id.progressbar);
         save_button = (Button)root.findViewById(R.id.btn_save);
-        myinfoNation = (TextView)root.findViewById(R.id.myinfo_nation);
+
         //Activity root3=getActivity(R.id.nav);
         //NavigationView navigationView = (NavigationView) root.findViewById(R.id.nav_view);
         // header = navigationView.getHeaderView(0);
@@ -97,9 +98,8 @@ public class MyinfoFragment extends Fragment{
             }
 
 
-        //이메일, 닉네임, 국적 불러오기
+        //이메일, 닉네임 불러오기
         myinfoEmail.setText(user.getEmail().toString());
-
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())
                     .get()
@@ -111,18 +111,13 @@ public class MyinfoFragment extends Fragment{
                                 //pp=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 myinfoNickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
                                 //파이어베이스에 등록된 닉네임을 불러옴
-
-                                myinfoNation.setText((String)task.getResult().getData().get(FirebaseID.nation));
-
                             }
                         }
                     });
         }
 
-
         //포토버튼 SEARCH FILES버튼이며 이걸 누르면 사진을 선택할 수 있음
         photo_button.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 showImageChooser();
@@ -137,7 +132,6 @@ public class MyinfoFragment extends Fragment{
 
             }
         });
-
         return root;
     }
 
