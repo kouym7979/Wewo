@@ -93,4 +93,3 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
 
 
 }
-

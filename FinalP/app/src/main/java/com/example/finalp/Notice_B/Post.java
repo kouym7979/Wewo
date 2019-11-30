@@ -13,7 +13,7 @@ public class Post {
     private Date date;
     public Post() {//빈생성자 생성
 
-   }
+    }
 
     public Post(String documentId, String title, String contents,String p_nickname) {//String p_nickname 잠시 보류
         this.documentId = documentId;
