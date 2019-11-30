@@ -4,38 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
+public class myinfo_layout extends AppCompatActivity {
 
-
-public class Post_write extends AppCompatActivity implements View.OnClickListener {
-
-    private FirebaseAuth mAuth=FirebaseAuth.getInstance();//사용자 정보 가져오기
-    private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
-    private EditText mTitle,mContents;//제목, 내용
-    private String p_nickname;//게시판에 표기할 닉네잉 //이게 가져온 값을 저장하는 임시 변수
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
+    private String nickname;
+    private String nation;
+    private TextView t_nick;
+    private TextView t_nation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_write);
+        setContentView(R.layout.activity_myinfo_layout);
 
-        mTitle=findViewById(R.id.Post_write_title);//제목 , item_post.xml의 변수와 혼동주의
-        mContents=findViewById(R.id.Post_write_contents);
-        findViewById(R.id.Post_save).setOnClickListener(this);
+        t_nick=(TextView)findViewById(R.id.myinfo_nickname);
 
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())// 여기 콜렉션 패스 경로가 중요해 보면 패스 경로가 user로 되어있어서
@@ -47,27 +38,15 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
-                                p_nickname=(String)task.getResult().getData().get(FirebaseID.nickname);//
+                                nickname=(String)task.getResult().getData().get(FirebaseID.nickname);//
+                                //nation= (String) task.getResult().getData().get(FirebaseID.nation);
                                 //닉네임 뿐만아니라 여기서 FirebaseID.password를 하면 비밀번호도 받아올 수 있음. 즉 원하는 것을 넣으면 됨
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }
                         }
                     });
         }
-    }
-    @Override
-    public void onClick(View v) {
-        if(mAuth.getCurrentUser()!=null){
-            String PostID=mStore.collection("Post").document().getId();//제목이 같아도 게시글이 겹치지않게
-
-            Map<String,Object> data=new HashMap<>();
-            data.put(FirebaseID.documentId,mAuth.getCurrentUser().getUid());//유저 고유번호
-            data.put(FirebaseID.title,mTitle.getText().toString());//게시글제목
-            data.put(FirebaseID.contents,mContents.getText().toString());//게시글 내용
-            data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
-            data.put(FirebaseID.nickname,p_nickname);
-            mStore.collection("Post").add(data);//Post라는 테이블에 데이터를 입력하는것
-            finish();
-        }
+        t_nick.setText(nickname);
+        t_nation.setText(nation);
     }
 }

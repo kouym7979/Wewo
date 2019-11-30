@@ -46,7 +46,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override//밑에 메소드들은 그냥 implement method한거입니다. 해야한대요
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Context context =parent.getContext();
-       // LayoutInflater inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        // LayoutInflater inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         //View view = inflater.inflate(R.layout.item_post,parent,false);
         //PostViewHolder
         //View view=inflater.inflate(R.layout.item_post,parent,false);
@@ -103,9 +103,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             contents=itemView.findViewById(R.id.post_contents);
             p_nickname=itemView.findViewById(R.id.post_writer);
 
-
-           //Intent intent = new Intent(View.,)
-                   // int pos=getAdapterPosition();//몇 번째의 게시글을 클릭했는지 알기위해
 
         }
 
