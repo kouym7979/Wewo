@@ -60,26 +60,6 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
-
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if(queryDocumentSnapshots !=null) {
-                            mDatas.clear();//미리 생성된 게시글들을 다시 불러오지않게 데이터를 한번 정리
-                            for(DocumentSnapshot snap: queryDocumentSnapshots.getDocuments()){
-                                Map<String,Object> shot=snap.getData();
-                                String documentId=String.valueOf(shot.get(FirebaseID.documentId));
-                                String title=String.valueOf(shot.get(FirebaseID.title));
-                                String contents=String.valueOf(shot.get(FirebaseID.contents));
-                                String p_nickname=String.valueOf(shot.get(FirebaseID.nickname));
-                                Post data=new Post(documentId,title,contents,p_nickname);
-                                mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
-                            }
-                            mAdapter = new PostAdapter(mDatas);//mDatas라는 생성자를 넣어줌
-                            mPostRecyclerView.setAdapter(mAdapter);
-                        }
-                    }
-                }) ;
-
                             @Override
                             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                                 if (queryDocumentSnapshots != null) {
@@ -98,9 +78,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                 }
                             }
                         });
-
     }
-
 
     @Override
     public void onClick(View v) {

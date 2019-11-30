@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.provider.MediaStore;
 import android.util.Log;
+=======
+>>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+<<<<<<< HEAD
 
 import com.example.finalp.FirebaseID;
 import com.example.finalp.R;
@@ -43,10 +47,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+=======
+import com.example.finalp.R;
+
+public class MyinfoFragment extends Fragment {
+>>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
 
 import java.io.IOException;
 import static android.app.Activity.RESULT_OK;
 
+<<<<<<< HEAD
 public class MyinfoFragment extends Fragment{
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
@@ -63,9 +73,12 @@ public class MyinfoFragment extends Fragment{
     private String profileImageUrl;
     private String photoUrl;
     private ImageView nav_imgView;
+=======
+>>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_myinfo, container, false);
+<<<<<<< HEAD
 
         myinfoNickname = (TextView)root.findViewById(R.id.myinfo_nickname) ;
         myinfoEmail = (TextView)root.findViewById(R.id.myinfo_email) ;
@@ -131,13 +144,16 @@ public class MyinfoFragment extends Fragment{
 
         //세이브 버튼 SAVE버튼이며 이걸 누르면 유저정보에 저장됨
         save_button.setOnClickListener(new View.OnClickListener(){
+=======
+        final TextView textView = root.findViewById(R.id.text_myinfo);
+        myinfoViewModel.getText().observe(this, new Observer<String>() {
+>>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
             @Override
             public void onClick(View view) {
                 saveUserInformation();
 
             }
         });
-
         return root;
     }
 
