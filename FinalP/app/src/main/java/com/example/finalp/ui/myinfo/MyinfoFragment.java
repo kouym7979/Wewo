@@ -74,6 +74,7 @@ public class MyinfoFragment extends Fragment{
         myinfoimageView = (ImageView)root.findViewById(R.id.imgv_photo);
         progressBar = root.findViewById(R.id.progressbar);
         save_button = (Button)root.findViewById(R.id.btn_save);
+        myinfoNation = (TextView)root.findViewById(R.id.myinfo_nation);
 
         //Activity root3=getActivity(R.id.nav);
         //NavigationView navigationView = (NavigationView) root.findViewById(R.id.nav_view);
@@ -83,13 +84,14 @@ public class MyinfoFragment extends Fragment{
 
 
             //사진 불러오기
-            photoUrl = user.getPhotoUrl().toString();
+
             if(user!=null) {
                 if (user.getPhotoUrl() == null) {
                     Log.d("사진", "포토유알엘이 비어있어요.");
 
                 }
                 if (user.getPhotoUrl() != null) {
+                    photoUrl = user.getPhotoUrl().toString();
                     Log.d("사진", user.getPhotoUrl().toString());
                     Picasso.get()
                             .load(user.getPhotoUrl().toString())
@@ -98,7 +100,7 @@ public class MyinfoFragment extends Fragment{
             }
 
 
-        //이메일, 닉네임 불러오기
+        //이메일, 닉네임, 국적 불러오기
         myinfoEmail.setText(user.getEmail().toString());
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())
@@ -111,6 +113,8 @@ public class MyinfoFragment extends Fragment{
                                 //pp=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 myinfoNickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
                                 //파이어베이스에 등록된 닉네임을 불러옴
+                                myinfoNation.setText((String)task.getResult().getData().get(FirebaseID.nation));
+
                             }
                         }
                     });
