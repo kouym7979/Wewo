@@ -1,9 +1,13 @@
 package com.example.finalp.adapters;
 
+
+import android.content.Context;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +32,10 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Post> datas;//뒷부분 추가
+
+    //private Context context;
+    public PostAdapter(List<Post> datas) {//어댑터에 대한 생성자
+
     private Context mcontext;
 
 
@@ -38,6 +46,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
     public PostAdapter(Context mcontext,List<Post> datas) {//어댑터에 대한 생성자
+
         this.datas = datas;
         this.mcontext=mcontext;
     }
@@ -64,7 +73,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.contents.setText(datas.get(position).getContents());//리스트로 만들어 주기 위해서
 
 
-
         //예를들면 첫째줄에 데이터에 위치를 각각 0번째 1번째...으로 받아서 그 위치마다 0번째 데이터위치에
         //0번째 제목, 0번째 내용 이런식으로 묶어서 리스트로 만들기 위해서 모델객체를 선언, holder가 그런 것을 지정해줌
     }
@@ -88,6 +96,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             title=itemView.findViewById(R.id.post_title);
             contents=itemView.findViewById(R.id.post_contents);
             p_nickname=itemView.findViewById(R.id.post_writer);
+
            itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -101,6 +110,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
            });
            //Intent intent = new Intent(View.,)
                    // int pos=getAdapterPosition();//몇 번째의 게시글을 클릭했는지 알기위해
+
 
         }
 

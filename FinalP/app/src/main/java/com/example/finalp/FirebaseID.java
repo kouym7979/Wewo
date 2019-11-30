@@ -9,6 +9,9 @@ public class FirebaseID {
     public static String password="password";
     public static String nickname="nickname";
 
+    public static String nation="nation";
+
+
     public static String title="title";
     public static String contents="contents";
     public static String timestamp="timestamp";
