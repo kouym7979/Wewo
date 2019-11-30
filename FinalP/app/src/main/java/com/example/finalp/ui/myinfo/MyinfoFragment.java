@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.provider.MediaStore;
 import android.util.Log;
-=======
->>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-<<<<<<< HEAD
 
 import com.example.finalp.FirebaseID;
 import com.example.finalp.R;
@@ -47,17 +42,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-=======
-import com.example.finalp.R;
-
-public class MyinfoFragment extends Fragment {
->>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
-
 import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
-<<<<<<< HEAD
+
 public class MyinfoFragment extends Fragment{
+
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private String nick;
@@ -73,13 +65,9 @@ public class MyinfoFragment extends Fragment{
     private String profileImageUrl;
     private String photoUrl;
     private ImageView nav_imgView;
-=======
->>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_myinfo, container, false);
-<<<<<<< HEAD
-
         myinfoNickname = (TextView)root.findViewById(R.id.myinfo_nickname) ;
         myinfoEmail = (TextView)root.findViewById(R.id.myinfo_email) ;
         photo_button = (Button)root.findViewById(R.id.btn_photo);
@@ -87,6 +75,7 @@ public class MyinfoFragment extends Fragment{
         progressBar = root.findViewById(R.id.progressbar);
         save_button = (Button)root.findViewById(R.id.btn_save);
         myinfoNation = (TextView)root.findViewById(R.id.myinfo_nation);
+
         //Activity root3=getActivity(R.id.nav);
         //NavigationView navigationView = (NavigationView) root.findViewById(R.id.nav_view);
         // header = navigationView.getHeaderView(0);
@@ -95,13 +84,14 @@ public class MyinfoFragment extends Fragment{
 
 
             //사진 불러오기
-            photoUrl = user.getPhotoUrl().toString();
+
             if(user!=null) {
                 if (user.getPhotoUrl() == null) {
                     Log.d("사진", "포토유알엘이 비어있어요.");
 
                 }
                 if (user.getPhotoUrl() != null) {
+                    photoUrl = user.getPhotoUrl().toString();
                     Log.d("사진", user.getPhotoUrl().toString());
                     Picasso.get()
                             .load(user.getPhotoUrl().toString())
@@ -112,7 +102,6 @@ public class MyinfoFragment extends Fragment{
 
         //이메일, 닉네임, 국적 불러오기
         myinfoEmail.setText(user.getEmail().toString());
-
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())
                     .get()
@@ -124,7 +113,6 @@ public class MyinfoFragment extends Fragment{
                                 //pp=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 myinfoNickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
                                 //파이어베이스에 등록된 닉네임을 불러옴
-
                                 myinfoNation.setText((String)task.getResult().getData().get(FirebaseID.nation));
 
                             }
@@ -132,10 +120,8 @@ public class MyinfoFragment extends Fragment{
                     });
         }
 
-
         //포토버튼 SEARCH FILES버튼이며 이걸 누르면 사진을 선택할 수 있음
         photo_button.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 showImageChooser();
@@ -144,10 +130,6 @@ public class MyinfoFragment extends Fragment{
 
         //세이브 버튼 SAVE버튼이며 이걸 누르면 유저정보에 저장됨
         save_button.setOnClickListener(new View.OnClickListener(){
-=======
-        final TextView textView = root.findViewById(R.id.text_myinfo);
-        myinfoViewModel.getText().observe(this, new Observer<String>() {
->>>>>>> parent of 05d263f... Merge pull request #8 from kouym7979/hong
             @Override
             public void onClick(View view) {
                 saveUserInformation();
