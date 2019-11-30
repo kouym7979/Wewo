@@ -45,13 +45,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NonNull
     @Override//밑에 메소드들은 그냥 implement method한거입니다. 해야한대요
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Context context =parent.getContext();
-        // LayoutInflater inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        //View view = inflater.inflate(R.layout.item_post,parent,false);
-        //PostViewHolder
-        //View view=inflater.inflate(R.layout.item_post,parent,false);
-        //context=parent.getContext();
-        //return new PostViewHolder(view);
         return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post,parent,false));
     }
 
