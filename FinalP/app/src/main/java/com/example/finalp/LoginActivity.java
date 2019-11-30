@@ -44,9 +44,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
        {
            startActivity(new Intent(this,nav.class));
            finish();
-       }
+       }*/
 
-     */
+
 
     @Override
     public void onClick(View v) {
