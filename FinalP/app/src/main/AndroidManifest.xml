@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Post_Comment"></activity>
-        <activity android:name=".Post_content" />
         <activity
             android:name=".nav"
             android:label="@string/title_activity_nav"
