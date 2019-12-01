@@ -3,11 +3,12 @@ package com.example.finalp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText Em,Pw;
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseUser currentUser;
-
+    private CheckBox check1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,24 +31,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Em=findViewById(R.id.Email);
         Pw=findViewById(R.id.password);
+        check1 = (CheckBox)findViewById(R.id.chk_autologin);
 
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+
+        check1.setChecked(pref.getBoolean("check1", false));
+
     }
 
-   /* @Override//자동로그인 함수
+
+    @Override//자동로그인 함수
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         currentUser = mAuth.getCurrentUser();
-       if(currentUser!=null)
-       {
-           startActivity(new Intent(this,nav.class));
-           finish();
-       }*/
+        check1 = (CheckBox)findViewById(R.id.chk_autologin);
+        if(check1.isChecked()==true)
+        {
+            if (currentUser != null) {
+                startActivity(new Intent(this, nav.class));
+                finish();
+            }
+        }
+    }
 
-
-
+    public void onStop()
+    {
+        super.onStop();
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        CheckBox check1 = (CheckBox)findViewById(R.id.chk_autologin);
+        editor.putBoolean("check1", check1.isChecked());
+        editor.commit();
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -88,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
 
 
 }
