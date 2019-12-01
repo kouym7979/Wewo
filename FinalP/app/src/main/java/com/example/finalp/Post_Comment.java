@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -122,7 +124,12 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             data.put(FirebaseID.post_id,com_title.getText().toString());//게시글 제목으로 구별하기 위해
             //data.put(FirebaseID.position,intent.getExtras().getInt("position"));
             mStore.collection("Comment").add(data);//댓글 콜렉션에 저장
-            finish();
+            View view=this.getCurrentFocus();//작성버튼을 누르면 에딧텍스트 키보드 내리게 하기
+            if(view!=null){
+                InputMethodManager hide=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                hide.hideSoftInputFromWindow(view.getWindowToken(),0);
+                com_edit.setText("");
+            }
         }
     }
 }
