@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10sp"
-    android:orientation="vertical">
+    android:layout_margin="50dp"
+    android:orientation="vertical"
+    tools:context=".myinfo_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -67,71 +67,33 @@
             android:layout_marginLeft="30dp" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="25dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="96sp"
-                android:layout_height="96sp"
-                android:id="@+id/imgv_photo"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="20sp"
-                android:scaleType="centerCrop"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
-                app:srcCompat="@mipmap/ic_launcher" />
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <Button
-            android:id="@+id/btn_photo"
+        <TextView
+            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="false"
-            android:layout_centerVertical="false"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:padding="20sp"
-            android:text="Search Files" />
+            android:layout_marginTop="30dp"
+            android:text="내 사진 :" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="131dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
 
         <Button
-            android:id="@+id/btn_save"
-            android:layout_width="match_parent"
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50sp"
-            android:layout_marginRight="50sp"
-            android:text="Photo_Save" />
+            android:layout_weight="1"
+            android:text="Button" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     tools:context=".Post_Comment">
 
+    <LinearLayout
+        android:id="@+id/Com_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Comment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="제목입니다" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/Comment_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="16sp"
+            android:layout_gravity="right"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            tools:text="닉네임입니다" />
+
+    </LinearLayout>
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="댓글 다는곳입니다"/>
-</LinearLayout>
+        android:id="@+id/Comment_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_below="@id/Com_1"
+        tools:text="본문내용입니다" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Comment_text"
+        android:layout_above="@id/Edit"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comment_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/Edit"
+        >
+        <EditText
+            android:id="@+id/Edit_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Write Comment"
+            android:editable="true"
+            android:layout_weight="1"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/comment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/board_pen"
+            android:gravity="right"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

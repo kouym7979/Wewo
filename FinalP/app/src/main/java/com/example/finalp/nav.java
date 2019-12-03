@@ -83,6 +83,7 @@ public class nav extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
@@ -150,13 +151,15 @@ public class nav extends AppCompatActivity {
             });
         }
         //사진 불러오기
-        photoUrl = user.getPhotoUrl().toString();
+
         if(user!=null) {
+
             if (user.getPhotoUrl() == null) {
                 Log.d("사진", "포토유알엘이 비어있어요.");
 
             }
             if (user.getPhotoUrl() != null) {
+                photoUrl = user.getPhotoUrl().toString();
                 Log.d("사진", user.getPhotoUrl().toString());
                 Picasso.get()
                         .load(user.getPhotoUrl().toString())

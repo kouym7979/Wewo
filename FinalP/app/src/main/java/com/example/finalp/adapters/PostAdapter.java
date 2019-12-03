@@ -45,13 +45,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NonNull
     @Override//밑에 메소드들은 그냥 implement method한거입니다. 해야한대요
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Context context =parent.getContext();
-       // LayoutInflater inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        //View view = inflater.inflate(R.layout.item_post,parent,false);
-        //PostViewHolder
-        //View view=inflater.inflate(R.layout.item_post,parent,false);
-        //context=parent.getContext();
-        //return new PostViewHolder(view);
         return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post,parent,false));
     }
 
@@ -62,8 +55,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.p_nickname.setText(datas.get(position).getP_nickname());
         holder.title.setText(datas.get(position).getTitle());//각각 데이터에 들어있는 제목 내용들이 각각 하나고 여러개가 아니기때문에
         holder.contents.setText(datas.get(position).getContents());//리스트로 만들어 주기 위해서
+        final int posi=holder.getAdapterPosition();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+                Context context=v.getContext();
+                if(posi!=RecyclerView.NO_POSITION){
+                    Intent intent=new Intent(v.getContext(),Post_Comment.class);
+                    intent.putExtra("title",datas.get(posi).getTitle());
+                    intent.putExtra("content",datas.get(posi).getContents());
+                    intent.putExtra("nickname",datas.get(posi).getP_nickname());
+                    //intent.putExtra("title",datas.get(pos).title);
+                    mcontext.startActivity(intent);
+                }
+            }
+        });
 
         //예를들면 첫째줄에 데이터에 위치를 각각 0번째 1번째...으로 받아서 그 위치마다 0번째 데이터위치에
         //0번째 제목, 0번째 내용 이런식으로 묶어서 리스트로 만들기 위해서 모델객체를 선언, holder가 그런 것을 지정해줌
@@ -88,19 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             title=itemView.findViewById(R.id.post_title);
             contents=itemView.findViewById(R.id.post_contents);
             p_nickname=itemView.findViewById(R.id.post_writer);
-           itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   int pos=getAdapterPosition();
-                   Context context=v.getContext();
-                   if(pos!=RecyclerView.NO_POSITION){
-                       Intent intent=new Intent(v.getContext(),Post_Comment.class);
-                       mcontext.startActivity(intent);
-                   }
-               }
-           });
-           //Intent intent = new Intent(View.,)
-                   // int pos=getAdapterPosition();//몇 번째의 게시글을 클릭했는지 알기위해
+
 
         }
 
