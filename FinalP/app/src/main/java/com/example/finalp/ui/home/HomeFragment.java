@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.finalp.HomeActivity;
+import com.example.finalp.NoticeActivity;
 import com.example.finalp.NoticeBoardActivity;
 import com.example.finalp.R;
 
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment {
                             break ;
                         case R.id.post6 :
                             Toast.makeText(context,"공지사항",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getActivity(), NoticeActivity.class));
                             break ;
                     }
                 }

@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".modifyPassword"></activity>
+        <activity android:name=".noticeResult"></activity>
+        <activity android:name=".modifyPassword" />
         <activity android:name=".Post_Comment" />
         <activity android:name=".Post_content" />
         <activity
@@ -18,6 +19,7 @@
             android:label="@string/title_activity_nav"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Post_write" />
+        <activity android:name=".NoticeActivity" />
         <activity android:name=".NoticeBoardActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".HomeActivity" />
