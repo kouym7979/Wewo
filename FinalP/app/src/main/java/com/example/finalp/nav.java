@@ -110,8 +110,6 @@ public class nav extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
-                                Log.d("닉네임","닉:"+task.getResult().getData().get(FirebaseID.nickname));
-                                //pp=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 textview_nickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }

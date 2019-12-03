@@ -76,7 +76,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         //sub_pos=intent.getExtras().getInt("position");
 
         DocumentReference docRef = mStore.collection("Comment").document("post_position");
-      
+
 
 
     }
