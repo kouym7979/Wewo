@@ -13,6 +13,12 @@ public class Content {
     private Date comment_date;
 
 
+    public Content(String doucumentId, String c_nickname, String comment, String post_position) {
+        this.c_nickname = c_nickname;
+        this.comment = comment;
+        this.documentId=doucumentId;
+        this.post_position=post_position;
+    }
 
 
     public String getPost_position() {
@@ -23,12 +29,6 @@ public class Content {
         this.post_position = post_position;
     }
 
-    public Content(String doucumentId, String c_nickname, String comment, String post_position) {
-        this.c_nickname = c_nickname;
-        this.comment = comment;
-        this.documentId=doucumentId;
-        this.post_position=post_position;
-    }
 
 
     public Date getComment_date() {
