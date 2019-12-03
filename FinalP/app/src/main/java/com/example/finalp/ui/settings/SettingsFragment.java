@@ -4,32 +4,37 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.finalp.R;
+import com.example.finalp.modifyPassword;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment{
 
-    private SettingsViewModel settingsViewModel;
+    //private SettingsViewModel settingsViewModel;
+    EditText useremail;
+    Button password_find;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        settingsViewModel =
-                ViewModelProviders.of(this).get(SettingsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        final TextView textView = root.findViewById(R.id.text_settings);
-        settingsViewModel.getText().observe(this, new Observer<String>() {
+
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        password_find = (Button)view.findViewById(R.id.buttonFind);
+        useremail = (EditText)view.findViewById(R.id.editTextUserEmail);
+
+
+
+        password_find.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v)
+            {
+                ((modifyPassword)getActivity()).onClick(password_find);
             }
         });
-        return root;
+        return view;
     }
 }

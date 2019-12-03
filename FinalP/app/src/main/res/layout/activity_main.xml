@@ -40,17 +40,28 @@
             android:id="@+id/chk_autologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20sp"
+            android:layout_marginRight="0sp"
             android:layout_weight="1"
             android:text="AutoLogin" />
+
+       
+        <Button
+            android:id="@+id/findpw"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="find PW" />
+
+
+
 
         <Button
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
             android:text="Login" />
 
+            
         <Button
             android:id="@+id/signup"
             android:layout_width="wrap_content"
@@ -58,6 +69,7 @@
             android:layout_marginLeft="20sp"
             android:layout_weight="1"
             android:text="Signup" />
+
 
     </LinearLayout>
 

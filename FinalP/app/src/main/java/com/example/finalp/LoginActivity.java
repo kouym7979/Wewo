@@ -35,6 +35,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
+
+        findViewById(R.id.findpw).setOnClickListener(this);
+
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
 
         check1.setChecked(pref.getBoolean("check1", false));
@@ -83,6 +86,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.signup:
                 startActivity(new Intent(this,SignupActivity.class));
+                break;
+            case R.id.findpw:
+                startActivity(new Intent(this,modifyPassword.class));
                 break;
         }
 
