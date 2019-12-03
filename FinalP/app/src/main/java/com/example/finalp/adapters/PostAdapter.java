@@ -50,7 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {//아이템을 하나하나 보여주는 함수
         Post data=datas.get(position);//Post라는 모델객체를 하나 만든 이유
         holder.p_nickname.setText(datas.get(position).getP_nickname());
         holder.title.setText(datas.get(position).getTitle());//각각 데이터에 들어있는 제목 내용들이 각각 하나고 여러개가 아니기때문에
@@ -66,6 +66,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     intent.putExtra("title",datas.get(posi).getTitle());
                     intent.putExtra("content",datas.get(posi).getContents());
                     intent.putExtra("nickname",datas.get(posi).getP_nickname());
+                    intent.putExtra("time",datas.get(posi).getDate());
+                    intent.putExtra("position",posi);//게시글의 위치를 넘겨줌
                     //intent.putExtra("title",datas.get(pos).title);
                     mcontext.startActivity(intent);
                 }

@@ -31,23 +31,54 @@
         android:hint="Password"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/signup"
+
+        <CheckBox
+            android:id="@+id/chk_autologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signup"/>
+            android:layout_marginRight="0sp"
+            android:layout_weight="1"
+            android:text="AutoLogin" />
+
+
         <Button
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
-           />
+            android:text="Login" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/findpw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="find PW" />
+
+            <Button
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_weight="1"
+                android:text="Signup" />
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
+
 
 
 </LinearLayout>
