@@ -35,7 +35,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.signup).setOnClickListener(this);
+
         findViewById(R.id.findpw).setOnClickListener(this);
+
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
 
         check1.setChecked(pref.getBoolean("check1", false));
