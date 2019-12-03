@@ -9,19 +9,22 @@
         android:id="@+id/post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
         android:layout_margin="8dp"
-        tools:text="Title"/>
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Title" />
+
     <TextView
         android:id="@+id/post_contents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="normal"
-        android:textSize="16sp"
+        android:singleLine="true"
         android:textColor="@android:color/black"
-        tools:text="Contents"/>
+        android:textSize="16sp"
+        android:textStyle="normal"
+        tools:text="Contents" />
     <TextView
         android:id="@+id/post_writer"
         android:layout_width="wrap_content"
