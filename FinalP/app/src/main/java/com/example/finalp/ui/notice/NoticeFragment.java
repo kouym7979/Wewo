@@ -23,4 +23,5 @@ public class NoticeFragment extends Fragment {
 
         return root;
     }
+
 }
