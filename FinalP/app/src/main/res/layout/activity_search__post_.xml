@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NoticeBoardActivity">
+    tools:context=".Search_Post_Activity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout1"
         android:orientation="horizontal"
         >
-    <TextView
-        android:id="@+id/post1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Foreigner Post"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Please enter a search term"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"/>
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -27,8 +27,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/search_btn1"
-            android:text="Search"
+            android:id="@+id/search_btn"
+            android:text="Enter"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             />
@@ -40,12 +40,12 @@
         android:id="@+id/lay2"
         android:layout_below="@+id/layout1"
         android:orientation="vertical">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/edit_button"

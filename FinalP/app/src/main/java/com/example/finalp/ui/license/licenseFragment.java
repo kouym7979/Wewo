@@ -16,20 +16,12 @@ import com.example.finalp.R;
 
 public class licenseFragment extends Fragment {
 
-    private LicenseViewModel licenseViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        licenseViewModel =
-                ViewModelProviders.of(this).get(LicenseViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_license, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        licenseViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
+
 }
