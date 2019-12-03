@@ -54,6 +54,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.edit_button).setOnClickListener(this);
 
 
+
     }
 
     @Override
