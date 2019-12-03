@@ -61,22 +61,30 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_text = (TextView) findViewById(R.id.Comment_text);//본문
         com_edit = (EditText) findViewById(R.id.Edit_comment);//댓글 작성 내용
         mCommentRecyclerView = findViewById(R.id.comment_recycler);//코멘트 리사이클러뷰
-
-
         Intent intent = getIntent();//데이터 전달받기
         com_pos = intent.getExtras().getInt("position");
-
-
         com_nick.setText(intent.getStringExtra("nickname"));
         com_text.setText(intent.getStringExtra("content"));
         com_title.setText(intent.getStringExtra("title"));
         findViewById(R.id.comment_button).setOnClickListener(this);//댓글 입력 버튼
 
-        //comment_edit=com_edit.getText().toString();//작성된 댓글을 문자열에 저장
-        //sub_pos=intent.getExtras().getInt("position");
-
-        DocumentReference docRef = mStore.collection("Comment").document("post_position");
-
+        if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
+            mStore.collection("user").document(mAuth.getCurrentUser().getUid())// 여기 콜렉션 패스 경로가 중요해 보면 패스 경로가 user로 되어있어서
+                    //우리 파이어베이스의 user 컬렉션의 정보를 가져올 수 있어. email, password, Uid(주민번호같은 거), nickname
+                    //현재는 user에는 저 4개의 정보밖에 없어. 만약 다른 정보를 추가로 받고싶다면 어제 말했듯이 너가 가입에서부터 새로 입력값을 받고
+                    //FirebaseID에 똑같이 추가하고 SIgnupActivity에 UserMap부분을 수정하면되. 아마 UserInfo에 객체 생성은 따로 안해줘도 될거야 내가 형식을 바꿔놔서
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.getResult()!=null){
+                               comment_p=(String)task.getResult().getData().get(FirebaseID.nickname);//
+                                //닉네임 뿐만아니라 여기서 FirebaseID.password를 하면 비밀번호도 받아올 수 있음. 즉 원하는 것을 넣으면 됨
+                                //파이어베이스에 등록된 닉네임을 불러옴
+                            }
+                        }
+                    });
+        }
 
 
     }
@@ -89,8 +97,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             mStore.collection("Comment")
                     .whereEqualTo("post_position", Integer.toString(com_pos))//리사이클러뷰에 띄울 파이어베이스 테이블 경로
                     .orderBy(FirebaseID.timestamp, Query.Direction.ASCENDING)//시간정렬순으로 이건 처음에 작성한게 제일 위로 올라감 게시글과 반대
-                    .addSnapshotListener(
-                            new EventListener<QuerySnapshot>() {
+                    .addSnapshotListener(new EventListener<QuerySnapshot>(){
                                 @Override
                                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                                     if (queryDocumentSnapshots != null) {
@@ -101,7 +108,6 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                                                 String comment = String.valueOf(shot.get(FirebaseID.comment));
                                                 String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                                 Content data = new Content(documentId, comment, c_nickname, Integer.toString(com_pos));
-                                                //if(Inte)
                                                 mcontent.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                                 Log.d("위치","포문안에 들어왔습니다");
                                             }
@@ -112,32 +118,6 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                                     }
 
                             });
-       /* mStore.collection("Comment")
-                .whereEqualTo("post_position", Integer.toString(com_pos))
-                //.orderBy(FirebaseID.timestamp, Query.Direction.ASCENDING)//시간정렬순으로 이건 처음에 작성한게 제일 위로 올라감 게시글과 반대
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        Log.d("확인", "여기까지 들어왔따" + Integer.toString(com_pos));
-                        if (task.isSuccessful()) {
-                            mcontent.clear();//미리 생성된 게시글들을 다시 불러오지않게 데이터를 한번 정리
-                            Log.d("확인", "위치" + Integer.toString(com_pos));
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<String, Object> shot = document.getData();
-                                String documentId = String.valueOf(shot.get(FirebaseID.documentId));
-                                String comment = String.valueOf(shot.get(FirebaseID.comment));
-                                String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                                Log.d("확인", "댓글정보" + documentId + comment + c_nickname);
-                                Content data = new Content(documentId, comment, c_nickname, Integer.toString(com_pos));
-                                mcontent.add(data);//여기까지가 게시글에 해당하는 데이터 적용
-                            }
-                        }
-                        contentAdapter = new PostContentAdapter(mcontent);//mDatas라는 생성자를 넣어줌
-                        mCommentRecyclerView.setAdapter(contentAdapter);
-                    }
-                });*/
-        // }
     }
 
 
@@ -148,7 +128,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             data.put(FirebaseID.documentId, mAuth.getCurrentUser().getUid());//유저 고유번호
             data.put(FirebaseID.comment, com_edit.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
-            data.put(FirebaseID.nickname, com_nick.getText().toString());
+            data.put(FirebaseID.nickname, comment_p);
             Intent intent = getIntent();//데이터 전달받기
             com_pos = intent.getExtras().getInt("position");//Post 콜렉션의 게시글 등록위치를 전달받아옴
             //Log.d("확인","위치"+com_pos);
@@ -160,6 +140,8 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                 hide.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 com_edit.setText("");
             }
+            finish();
+            startActivity(intent);
         }
     }
 }
