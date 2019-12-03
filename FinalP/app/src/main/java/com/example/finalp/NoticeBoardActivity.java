@@ -53,8 +53,6 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         mPostRecyclerView = findViewById(R.id.recyclerview);
         findViewById(R.id.edit_button).setOnClickListener(this);
 
-        findViewById(R.id.search_btn1).setOnClickListener(this);
-
 
 
     }
@@ -98,10 +96,6 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.search_btn1: {
-                startActivity(new Intent(this, Search_Post_Activity.class));
-                break;
-            }
             case R.id.edit_button: {
                 startActivity(new Intent(this, Post_write.class));
                 break;
