@@ -3,36 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="false"
+    android:layout_centerHorizontal="false"
+    android:layout_centerVertical="false"
+    android:layout_gravity="center_vertical"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_orange_light"
-        android:textSize="36sp"
-        android:text="WEWO"
         android:layout_marginBottom="50dp"
-        />
-   <EditText
-       android:id="@+id/Email"
-       android:layout_height="wrap_content"
-       android:layout_width="match_parent"
-       android:layout_margin="8dp"
-       android:hint="Email"/>
+        android:text="WEWO"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="Email" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:inputType="textPassword"
-        android:hint="Password"/>
+        android:hint="Password"
+        android:inputType="textPassword" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
         android:gravity="end"
         android:orientation="horizontal">
 
@@ -40,19 +46,9 @@
             android:id="@+id/chk_autologin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="0sp"
+            android:layout_marginRight="10sp"
             android:layout_weight="1"
             android:text="AutoLogin" />
-
-       
-        <Button
-            android:id="@+id/findpw"
-            android:layout_width="116dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="find PW" />
-
-
 
 
         <Button
@@ -61,7 +57,23 @@
             android:layout_height="wrap_content"
             android:text="Login" />
 
-            
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="10sp">
+
+        <Button
+            android:id="@+id/findpw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="find PW" />
+
         <Button
             android:id="@+id/signup"
             android:layout_width="wrap_content"
@@ -69,8 +81,6 @@
             android:layout_marginLeft="20sp"
             android:layout_weight="1"
             android:text="Signup" />
-
-
     </LinearLayout>
 
 

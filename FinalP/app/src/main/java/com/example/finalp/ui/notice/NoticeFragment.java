@@ -1,4 +1,4 @@
-package com.example.finalp.ui.license;
+package com.example.finalp.ui.notice;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,13 +14,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.finalp.R;
 
-public class licenseFragment extends Fragment {
-
+public class NoticeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_license, container, false);
+        View root = inflater.inflate(R.layout.fragment_notice, container, false);
+
         return root;
     }
 

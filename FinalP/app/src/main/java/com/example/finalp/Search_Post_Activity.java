@@ -1,75 +1,57 @@
 package com.example.finalp;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.example.finalp.Notice_B.Post;
 import com.example.finalp.adapters.PostAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class NoticeBoardActivity extends AppCompatActivity implements View.OnClickListener, PostAdapter.EventListener {
+public class Search_Post_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
-
     private RecyclerView mPostRecyclerView;
-
     private PostAdapter mAdapter;
     private List<Post> mDatas;
-    private Button search_btn1;
-
-
+    private EditText search;
+    private Button s_btn;
+    String search_edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice_board);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Foreign Post");
+        setContentView(R.layout.activity_search__post_);
 
         mPostRecyclerView = findViewById(R.id.recyclerview);
+        search=findViewById(R.id.search);//검색어
+
+        findViewById(R.id.search_btn).setOnClickListener(this);
         findViewById(R.id.edit_button).setOnClickListener(this);
-
-
-
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.search, menu);
-        return true;
-
-    }
-
     @Override
     protected void onStart(){
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
+                .whereEqualTo("title",search_edit)//게시판 제목중에 검색어와 똑같으면 검색
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
@@ -80,34 +62,36 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                     for (DocumentSnapshot snap : queryDocumentSnapshots.getDocuments()) {
                                         Map<String, Object> shot = snap.getData();
                                         String documentId = String.valueOf(shot.get(FirebaseID.documentId));
-                                        String title = String.valueOf(shot.get(FirebaseID.title));
+                                        String title=String.valueOf(shot.get(FirebaseID.title));
                                         String contents = String.valueOf(shot.get(FirebaseID.contents));
-                                        String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                                        Post data = new Post(documentId, title, contents, p_nickname);
+                                        String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
+                                        Post data = new Post(documentId, title, contents, c_nickname);
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
-                                    mAdapter = new PostAdapter(NoticeBoardActivity.this,mDatas);//mDatas라는 생성자를 넣어줌
+                                    mAdapter = new PostAdapter(Search_Post_Activity.this,mDatas);//mDatas라는 생성자를 넣어줌
                                     mPostRecyclerView.setAdapter(mAdapter);
                                 }
                             }
                         });
     }
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.edit_button: {
-                startActivity(new Intent(this, Post_write.class));
+        switch (v.getId())
+        {
+            case R.id.search_btn:
+            {
+                search_edit=search.getText().toString();//검색어를 문자열로 추출
+                Log.d("확인","검색내용:"+search_edit);
+                View view = this.getCurrentFocus();//작성버튼을 누르면 에딧텍스트 키보드 내리게 하기
+                if (view != null) {//댓글작성시 키보드 내리고 댓글에 작성한 내용 초기화
+                    InputMethodManager hide = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    hide.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    search.setText("");
+                }
                 break;
             }
+            case R.id.edit_button:startActivity(new Intent(this, Post_write.class));
+            break;
         }
     }
-
-    @Override
-    public void onItemClicked(int position) {
-        Toast.makeText(this,"몇 번째"+position,Toast.LENGTH_SHORT).show();
-        //startActivity(new Intent(this,Post_Comment.class));
-    }
-
-
 }

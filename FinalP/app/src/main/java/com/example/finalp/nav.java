@@ -89,7 +89,7 @@ public class nav extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.nav, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
         return true;
     }
 
@@ -110,8 +110,6 @@ public class nav extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
-                                Log.d("닉네임","닉:"+task.getResult().getData().get(FirebaseID.nickname));
-                                //pp=(String)task.getResult().getData().get(FirebaseID.nickname);//이부분이 안되네
                                 textview_nickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
                                 //파이어베이스에 등록된 닉네임을 불러옴
                             }
