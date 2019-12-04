@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".noticeResult"></activity>
-        
         <activity android:name=".modifyPassword" />
         <activity android:name=".Post_Comment" />
         <activity android:name=".Post_content" />
