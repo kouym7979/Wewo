@@ -23,4 +23,5 @@ public class licenseFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_license, container, false);
         return root;
     }
+
 }
