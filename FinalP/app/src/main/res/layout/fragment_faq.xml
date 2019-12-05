@@ -6,8 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notice_recycler"
-        tools:listitem="@layout/item_card"
+        android:id="@+id/faq_recycler"
+        tools:listitem="@layout/faqitem_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
+
+
