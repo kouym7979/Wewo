@@ -1,15 +1,10 @@
 package com.example.finalp;
 
-import android.content.ContentResolver;
-import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.util.Log;
 import android.view.View;
@@ -33,10 +28,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.net.Uri;
+
 import android.view.Menu;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +70,7 @@ public class nav extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_notice, R.id.nav_license,
-                R.id.nav_settings, R.id.nav_myinfo, R.id.nav_logout)
+                R.id.nav_faq, R.id.nav_myinfo, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
 

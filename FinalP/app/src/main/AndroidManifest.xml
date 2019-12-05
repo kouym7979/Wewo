@@ -16,6 +16,8 @@
         <activity android:name=".Post_content" />
         <activity android:name=".NoticeActivity"/>
         <activity android:name=".noticeResult"/>
+        <activity android:name=".FAQActivity"/>
+        <activity android:name=".noticefaqResult"/>
         <activity
             android:name=".nav"
             android:label="@string/title_activity_nav"
