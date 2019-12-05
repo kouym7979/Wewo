@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.finalp.Notice_B.Content;
@@ -43,6 +44,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     private TextView com_title;
     private TextView com_text;
     private TextView com_nick;
+    private ImageView com_photo;
     private PostContentAdapter contentAdapter;
     private RecyclerView mCommentRecyclerView;
     private List<Content> mcontent;
@@ -60,12 +62,14 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_title = (TextView) findViewById(R.id.Comment_title);//제목
         com_text = (TextView) findViewById(R.id.Comment_text);//본문
         com_edit = (EditText) findViewById(R.id.Edit_comment);//댓글 작성 내용
+        com_photo = (ImageView) findViewById(R.id.Comment_photo); //작성자 이미지
         mCommentRecyclerView = findViewById(R.id.comment_recycler);//코멘트 리사이클러뷰
         Intent intent = getIntent();//데이터 전달받기
         com_pos = intent.getExtras().getInt("position");
         com_nick.setText(intent.getStringExtra("nickname"));
         com_text.setText(intent.getStringExtra("content"));
         com_title.setText(intent.getStringExtra("title"));
+        com_photo.setImageResource(R.drawable.wewo);
         findViewById(R.id.comment_button).setOnClickListener(this);//댓글 입력 버튼
 
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
