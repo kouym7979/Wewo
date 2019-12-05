@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_faq"
             android:icon="@drawable/ic_menu_manage"
-            android:title="FAQ(자주묻는질문)" />
+            android:title="@string/menu_settings" />
     </group>
 
     <item android:title="Communicate">
