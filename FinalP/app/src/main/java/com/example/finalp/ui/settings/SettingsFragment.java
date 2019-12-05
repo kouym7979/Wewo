@@ -20,7 +20,7 @@ public class SettingsFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_faq, container, false);
+        View view = inflater.inflate(R.layout.activity_home, container, false);
         startActivity(new Intent(getActivity(), FAQActivity.class));
         return view;
     }
