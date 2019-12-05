@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleAdapter;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -32,6 +34,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
     public interface  EventListener<QuerySnapshot>{
+        boolean onOptionItemSelected(MenuItem item);
+
         void onItemClicked(int position);
     }
 
@@ -55,7 +59,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.p_nickname.setText(datas.get(position).getP_nickname());
         holder.title.setText(datas.get(position).getTitle());//각각 데이터에 들어있는 제목 내용들이 각각 하나고 여러개가 아니기때문에
         holder.contents.setText(datas.get(position).getContents());//리스트로 만들어 주기 위해서
+
+
         final int posi=holder.getAdapterPosition();
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +73,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     intent.putExtra("title",datas.get(posi).getTitle());
                     intent.putExtra("content",datas.get(posi).getContents());
                     intent.putExtra("nickname",datas.get(posi).getP_nickname());
-                    intent.putExtra("time",datas.get(posi).getDate());
+                    //intent.putExtra("number",datas.get(posi).getPost_num());//게시글의 넘버를 넘겨줌
                     intent.putExtra("position",posi);//게시글의 위치를 넘겨줌
                     //intent.putExtra("title",datas.get(pos).title);
                     mcontext.startActivity(intent);

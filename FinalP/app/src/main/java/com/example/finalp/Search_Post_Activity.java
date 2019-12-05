@@ -34,7 +34,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
     private List<Post> mDatas;
     private EditText search;
     private Button s_btn;
-    String search_edit;
+    private String search_edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,8 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
 
         mPostRecyclerView = findViewById(R.id.recyclerview);
         search=findViewById(R.id.search);//검색어
-
+        search_edit= getIntent().getStringExtra("search");
+        Log.d("확인","검색어:"+search_edit);
         findViewById(R.id.search_btn).setOnClickListener(this);
         findViewById(R.id.edit_button).setOnClickListener(this);
     }
@@ -51,7 +52,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
-                .whereEqualTo("title",search_edit)//게시판 제목중에 검색어와 똑같으면 검색
+                .whereEqualTo("contents",search_edit)//게시판 제목중에 검색어와 똑같으면 검색
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {

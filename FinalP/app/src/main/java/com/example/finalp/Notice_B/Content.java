@@ -9,16 +9,30 @@ public class Content {
     private String comment;//댓글
     private String documentId;//댓글 단사람 고유식별번호
     private String post_position;
+    private String post_title;
     @ServerTimestamp
     private Date comment_date;
 
-
-    public Content(String doucumentId, String c_nickname, String comment, String post_position) {
+    public Content(String doucumentId, String c_nickname, String comment, String post_position, String post_title) {
         this.c_nickname = c_nickname;
         this.comment = comment;
         this.documentId=doucumentId;
         this.post_position=post_position;
+        this.post_title=post_title;
     }
+
+
+    public String getPost_title() {
+        return post_title;
+    }
+
+    public void setPost_title(String post_title) {
+        this.post_title = post_title;
+    }
+
+
+
+
 
 
     public String getPost_position() {
@@ -66,6 +80,7 @@ public class Content {
     public Content() {//빈생성자
 
     }
+
     @Override
     public String toString() {
         return "Content{" +
@@ -73,7 +88,9 @@ public class Content {
                 ", comment='" + comment + '\'' +
                 ", documentId='" + documentId + '\'' +
                 ", post_position='" + post_position + '\'' +
+                ", post_title='" + post_title + '\'' +
                 ", comment_date=" + comment_date +
                 '}';
     }
+
 }

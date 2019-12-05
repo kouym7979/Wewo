@@ -47,10 +47,10 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mCommentRecyclerView;
     private List<Content> mcontent;
     private EditText com_edit;
-    private String comment_p;//
+    private String comment_p,post_t;//
     String sub_pos;//코멘트에 들어가있는 게시글의 위치
     int com_pos = 0;//게시글의 등록된 위치
-
+    private String time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +66,8 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_nick.setText(intent.getStringExtra("nickname"));
         com_text.setText(intent.getStringExtra("content"));
         com_title.setText(intent.getStringExtra("title"));
+        post_t=intent.getStringExtra("title");//게시글의 위치
+        //time=(String)intent.getSerializableExtra("time");//해당 게시글의 등록 시간
         findViewById(R.id.comment_button).setOnClickListener(this);//댓글 입력 버튼
 
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
@@ -86,7 +88,6 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                     });
         }
 
-
     }
 
     @Override
@@ -95,7 +96,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         //if(Integer.toString(com_pos)==comment_p) {//게시글의 위치와 댓글의 위치가 같은거를 보여줌
         mcontent = new ArrayList<>();//리사이클러뷰에 표시할 댓글 목록
             mStore.collection("Comment")
-                    .whereEqualTo("post_position", Integer.toString(com_pos))//리사이클러뷰에 띄울 파이어베이스 테이블 경로
+                    .whereEqualTo("title", post_t)//리사이클러뷰에 띄울 파이어베이스 테이블 경로
                     .orderBy(FirebaseID.timestamp, Query.Direction.ASCENDING)//시간정렬순으로 이건 처음에 작성한게 제일 위로 올라감 게시글과 반대
                     .addSnapshotListener(new EventListener<QuerySnapshot>(){
                                 @Override
@@ -107,12 +108,10 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                                                 String documentId = String.valueOf(shot.get(FirebaseID.documentId));
                                                 String comment = String.valueOf(shot.get(FirebaseID.comment));
                                                 String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                                                Content data = new Content(documentId, comment, c_nickname, Integer.toString(com_pos));
+                                                Content data = new Content(documentId, comment, c_nickname,Integer.toString(com_pos),post_t);
                                                 mcontent.add(data);//여기까지가 게시글에 해당하는 데이터 적용
-                                                Log.d("위치","포문안에 들어왔습니다");
                                             }
                                         }
-                                    Log.d("위치","포문이 끝났습니다");
                                         contentAdapter = new PostContentAdapter(mcontent);//mDatas라는 생성자를 넣어줌
                                         mCommentRecyclerView.setAdapter(contentAdapter);
                                     }
@@ -129,7 +128,10 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             data.put(FirebaseID.comment, com_edit.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
             data.put(FirebaseID.nickname, comment_p);
+
             Intent intent = getIntent();//데이터 전달받기
+            data.put(FirebaseID.title,post_t);//게시글의 제목을 넣어준다 비교하기위해서
+            //Log.d("확인",po)
             com_pos = intent.getExtras().getInt("position");//Post 콜렉션의 게시글 등록위치를 전달받아옴
             //Log.d("확인","위치"+com_pos);
             data.put(FirebaseID.post_position, Integer.toString(com_pos));//작성된 게시판의 위치를 댓글에 저장
