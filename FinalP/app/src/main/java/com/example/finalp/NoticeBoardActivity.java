@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.finalp.Notice_B.Post;
@@ -27,6 +30,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,22 +43,22 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
 
     private PostAdapter mAdapter;
     private List<Post> mDatas;
-    private Button search_btn1;
-
-
+    private Button s_btn;
+    private String edit_s;//검색어 저장용도
+    private EditText search_edit;//검색어 에딧
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_board);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Foreign Post");
 
+        getSupportActionBar().setTitle("Foreign Post");
+        search_edit=findViewById(R.id.edit_search);
+        edit_s=search_edit.getText().toString();
         mPostRecyclerView = findViewById(R.id.recyclerview);
         findViewById(R.id.edit_button).setOnClickListener(this);
-
-
-
+        findViewById(R.id.search_btn).setOnClickListener(this);
     }
 
     @Override
@@ -62,11 +66,29 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.search, menu);
         return true;
-
     }
 
     @Override
-    protected void onStart(){
+    public boolean onOptionItemSelected(MenuItem item) {
+        Log.d("확인", "선택하세요");
+        switch (item.getItemId()) {
+            case R.id.action_search: {
+                Log.d("확인", "클릭되었습니다");//이게안되누
+                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
+                Toast.makeText(getApplicationContext(), "Search Click", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            case R.id.btn1:{
+                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
+                Log.d("확인", "검색되었습니다");//이게안되누
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onStart() {
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
@@ -86,7 +108,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         Post data = new Post(documentId, title, contents, p_nickname);
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
-                                    mAdapter = new PostAdapter(NoticeBoardActivity.this,mDatas);//mDatas라는 생성자를 넣어줌
+                                    mAdapter = new PostAdapter(NoticeBoardActivity.this, mDatas);//mDatas라는 생성자를 넣어줌
                                     mPostRecyclerView.setAdapter(mAdapter);
                                 }
                             }
@@ -96,16 +118,23 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.edit_button: {
+            case R.id.edit_button:
                 startActivity(new Intent(this, Post_write.class));
                 break;
-            }
+            case R.id.search_btn:
+                Intent intent=new Intent(this,Search_Post_Activity.class);
+                intent.putExtra("search",search_edit.getText().toString());//검색어와 관련된 것을 추리는 곳에 보냄
+                startActivity(intent);
+                Log.d("확인","여기는 포스트 코멘트:"+search_edit.getText().toString());
+                break;
+
         }
+
     }
 
     @Override
     public void onItemClicked(int position) {
-        Toast.makeText(this,"몇 번째"+position,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "몇 번째" + position, Toast.LENGTH_SHORT).show();
         //startActivity(new Intent(this,Post_Comment.class));
     }
 

@@ -9,12 +9,12 @@ public class Post {
     private String title;//게시글 제목
     private String contents;//게시글 내용
     private String p_nickname;//게시글 작성자 닉네임
-
     @ServerTimestamp
     private Date date;
     public Post() {//빈생성자 생성
 
     }
+
 
     public Post(String documentId, String title, String contents, String p_nickname) {//String p_nickname 잠시 보류
         this.documentId = documentId;
@@ -23,6 +23,9 @@ public class Post {
         this.p_nickname=p_nickname;
 
     }
+
+
+
     //alt+insert키르 누르면 클래스에 필요한 메소드 자동생성 가능
     public String getDocumentId() {
         return documentId;
@@ -73,5 +76,6 @@ public class Post {
                 ", date=" + date +
                 '}';
     }
+
 
 }

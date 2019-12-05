@@ -15,7 +15,9 @@ public class FirebaseID {
     public static String contents="contents";
     public static String timestamp="timestamp";
     public static String comment="conmment";//댓글
-   //public static String post_time="post_time";//게시글 위치
+
     public static String post_position="post_position";//몇번째 게시글인지 알기위해
+    public static String post_time="post_time";
+    public static String post_num;//게시글의 넘버
 
 }
