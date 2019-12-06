@@ -10,7 +10,6 @@ public class Post {
     private String contents;//게시글 내용
     private String p_nickname;//게시글 작성자 닉네임
     private String p_photo;//게시글 작성자 사진
-    private String post_photo; //게시글에 등록할 사진
     @ServerTimestamp
     private Date date;
     private String post_num;
@@ -19,14 +18,13 @@ public class Post {
     }
 
 
-    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo) {//String p_nickname 잠시 보류
+    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num) {//String p_nickname 잠시 보류
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;
         this.p_nickname=p_nickname;
         this.p_photo=p_photo;
         this.post_num=post_num;
-        this.post_photo=post_photo;
 
     }
 
@@ -89,14 +87,6 @@ public class Post {
         this.p_photo = p_photo;
     }
 
-    public String getPost_photo() {
-        return post_photo;
-    }
-
-    public void setPost_photo(String post_photo) {
-        this.post_photo = post_photo;
-    }
-
     @Override
     public String toString() {
         return "Post{" +
@@ -105,7 +95,6 @@ public class Post {
                 ", contents='" + contents + '\'' +
                 ", p_nickname='" + p_nickname + '\'' +
                 ", p_photo='" + p_photo + '\'' +
-                ", post_photo='" + post_photo + '\'' +
                 ", date=" + date +
                 ", post_num='" + post_num + '\'' +
                 '}';
