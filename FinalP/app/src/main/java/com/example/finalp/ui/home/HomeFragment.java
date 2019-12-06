@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,16 +23,21 @@ import com.example.finalp.HomeActivity;
 import com.example.finalp.NoticeActivity;
 import com.example.finalp.NoticeBoardActivity;
 import com.example.finalp.R;
+import com.example.finalp.Search_Post_Activity;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
 
     private Context context;
+    private EditText search;
+    private String edit;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_home, container, false);
         context = container.getContext();
+        search=view.findViewById(R.id.search);
+        edit=search.getText().toString();
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
                 @Override
@@ -73,6 +79,12 @@ public class HomeFragment extends Fragment {
                             Toast.makeText(context,"공지사항",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getActivity(), NoticeActivity.class));
                             break ;
+                        case R.id.searchBtn:
+                            Intent intent6=new Intent(getActivity(), Search_Post_Activity.class);
+                            intent6.putExtra("search",edit);//검색어와 관련된 것을 추리는 곳에 보냄
+                            startActivity(intent6);
+                            Log.d("확인","여기는 포스트 코멘트:"+edit);
+                            break;
                     }
                 }
             } ;
@@ -88,7 +100,9 @@ public class HomeFragment extends Fragment {
         post5_button.setOnClickListener(onClickListener) ;
         Button post6_button = (Button) view.findViewById(R.id.post6) ;
         post6_button.setOnClickListener(onClickListener) ;
-
+        Button s_btn=(Button) view.findViewById(R.id.searchBtn);
+        s_btn.setOnClickListener(onClickListener);
         return view;
     }
+
 }
