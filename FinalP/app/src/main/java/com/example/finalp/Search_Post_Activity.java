@@ -34,7 +34,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
     private List<Post> mDatas;
     private EditText search;
     private Button s_btn;
-    private String search_edit,post_n;
+    private String search_edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +43,16 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
         mPostRecyclerView = findViewById(R.id.recyclerview);
         search=findViewById(R.id.search);//검색어
         search_edit= getIntent().getStringExtra("search");
-        post_n=getIntent().getStringExtra("post");
         Log.d("확인","검색어:"+search_edit);
         findViewById(R.id.search_btn).setOnClickListener(this);
         findViewById(R.id.edit_button).setOnClickListener(this);
     }
-    @Override
+   /* @Override
     protected void onStart(){
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
-                .whereEqualTo("title",search_edit)//게시판 제목중에 검색어와 똑같으면 검색
+                .whereEqualTo("contents",search_edit)//게시판 제목중에 검색어와 똑같으면 검색
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
@@ -67,11 +66,8 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                         String title=String.valueOf(shot.get(FirebaseID.title));
                                         String contents = String.valueOf(shot.get(FirebaseID.contents));
                                         String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                         
-
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
-                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo,post_n);
-
+                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo);
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
                                     mAdapter = new PostAdapter(Search_Post_Activity.this,mDatas);//mDatas라는 생성자를 넣어줌
@@ -79,7 +75,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                 }
                             }
                         });
-    }
+    }*/
     @Override
     public void onClick(View v) {
         switch (v.getId())
