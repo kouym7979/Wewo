@@ -92,7 +92,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart() {  
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
@@ -135,6 +135,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
             case R.id.search_btn:
                 Intent intent=new Intent(this,Search_Post_Activity.class);
                 intent.putExtra("search",search_edit.getText().toString());//검색어와 관련된 것을 추리는 곳에 보냄
+                intent.putExtra("post",post_n);
                 startActivity(intent);
                 Log.d("확인","여기는 포스트 코멘트:"+search_edit.getText().toString());
                 break;
