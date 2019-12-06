@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +21,7 @@ import com.example.finalp.adapters.PostContentAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,6 +56,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     String sub_pos;//코멘트에 들어가있는 게시글의 위치
     int com_pos = 0;//게시글의 등록된 위치
     private String time;
+    private String photoUrl; //사진 저장 변수
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +74,38 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_text.setText(intent.getStringExtra("content"));
         com_title.setText(intent.getStringExtra("title"));
 
+        //사진 불러오기
+        FirebaseUser user= mAuth.getCurrentUser();
+        if(user!=null) {
+
+            if (user.getPhotoUrl() == null) {
+                Log.d("사진", "포토유알엘이 비어있어요.");
+
+            }
+            if (user.getPhotoUrl() != null) {
+                photoUrl = user.getPhotoUrl().toString();
+            }
+        }
+
+        if ( !intent.getExtras().getString("p_photo").isEmpty()) {
+            Log.d("피포토", intent.getExtras().getString("p_photo"));
+            Picasso.get()
+                    .load(intent.getStringExtra("p_photo"))
+                    .into(com_photo);
+        }
+        else
+        {
+            Picasso.get()
+                    .load(R.drawable.wewo)
+                    .into(com_photo);
+        }
+
+
+
         post_t=intent.getStringExtra("title");//게시글의 위치
         //time=(String)intent.getSerializableExtra("time");//해당 게시글의 등록 시간
 
-        com_photo.setImageResource(R.drawable.wewo);
+
 
         findViewById(R.id.comment_button).setOnClickListener(this);//댓글 입력 버튼
 
@@ -115,7 +147,8 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                                                 String documentId = String.valueOf(shot.get(FirebaseID.documentId));
                                                 String comment = String.valueOf(shot.get(FirebaseID.comment));
                                                 String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                                                Content data = new Content(documentId, comment, c_nickname,Integer.toString(com_pos),post_t);
+                                                String c_photo = String.valueOf(shot.get(FirebaseID.c_photo));
+                                                Content data = new Content(documentId, c_nickname, comment,  Integer.toString(com_pos),post_t,c_photo);
                                                 mcontent.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                             }
                                         }
@@ -135,7 +168,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             data.put(FirebaseID.comment, com_edit.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
             data.put(FirebaseID.nickname, comment_p);
-
+            data.put(FirebaseID.c_photo,photoUrl);
             Intent intent = getIntent();//데이터 전달받기
             data.put(FirebaseID.title,post_t);//게시글의 제목을 넣어준다 비교하기위해서
             //Log.d("확인",po)

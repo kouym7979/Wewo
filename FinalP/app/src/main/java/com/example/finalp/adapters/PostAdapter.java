@@ -73,6 +73,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     intent.putExtra("title",datas.get(posi).getTitle());
                     intent.putExtra("content",datas.get(posi).getContents());
                     intent.putExtra("nickname",datas.get(posi).getP_nickname());
+                    intent.putExtra("p_photo",datas.get(posi).getP_photo());
                     //intent.putExtra("number",datas.get(posi).getPost_num());//게시글의 넘버를 넘겨줌
                     intent.putExtra("position",posi);//게시글의 위치를 넘겨줌
                     //intent.putExtra("title",datas.get(pos).title);
