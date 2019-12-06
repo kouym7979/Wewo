@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -22,7 +21,6 @@ import com.example.finalp.Post_write;
 import com.example.finalp.R;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,17 +59,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.p_nickname.setText(datas.get(position).getP_nickname());
         holder.title.setText(datas.get(position).getTitle());//각각 데이터에 들어있는 제목 내용들이 각각 하나고 여러개가 아니기때문에
         holder.contents.setText(datas.get(position).getContents());//리스트로 만들어 주기 위해서
-        if ( !datas.get(position).getPost_photo().isEmpty()) {
-            Picasso.get()
-                    .load(datas.get(position).getPost_photo())
-                    .into(holder.post_photo);
-        }
-        else
-        {
-            Picasso.get()
-                    .load(R.drawable.wewo)
-                    .into(holder.post_photo);
-        }
+
 
         final int posi=holder.getAdapterPosition();
 
@@ -86,7 +74,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     intent.putExtra("content",datas.get(posi).getContents());
                     intent.putExtra("nickname",datas.get(posi).getP_nickname());
                     intent.putExtra("p_photo",datas.get(posi).getP_photo());
-                    intent.putExtra("post_photo",datas.get(posi).getPost_photo());
                     //intent.putExtra("number",datas.get(posi).getPost_num());//게시글의 넘버를 넘겨줌
                     intent.putExtra("position",posi);//게시글의 위치를 넘겨줌
                     //intent.putExtra("title",datas.get(pos).title);
@@ -111,14 +98,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private TextView title;
         private TextView contents;
         private TextView p_nickname;
-        private ImageView post_photo;
+
         public PostViewHolder(@NonNull final View itemView) {//포스트 뷰홀더의 생성자
             super(itemView);
 
             title=itemView.findViewById(R.id.post_title);
             contents=itemView.findViewById(R.id.post_contents);
             p_nickname=itemView.findViewById(R.id.post_writer);
-            post_photo=itemView.findViewById(R.id.post_imageView);
+
 
         }
 

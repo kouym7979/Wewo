@@ -111,8 +111,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String contents = String.valueOf(shot.get(FirebaseID.contents));
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
-                                        String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
-                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo);
+                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n);
 
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
