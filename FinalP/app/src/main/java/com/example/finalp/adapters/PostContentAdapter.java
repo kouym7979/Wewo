@@ -1,5 +1,6 @@
 package com.example.finalp.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalp.Notice_B.Content;
 import com.example.finalp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,7 +35,18 @@ public class PostContentAdapter extends RecyclerView.Adapter<PostContentAdapter.
         Content data=mcontent_data.get(position);
         holder.c_nickname.setText(mcontent_data.get(position).getC_nickname());
         holder.comment.setText(mcontent_data.get(position).getComment());
-        holder.c_photo.setImageResource(R.drawable.wewo); //일단 임시로 wewo 이미지로 해놈
+        Log.d("씨포토2",mcontent_data.get(position).getC_photo());
+        if ( !mcontent_data.get(position).getC_photo().isEmpty()) {
+            Picasso.get()
+                    .load(mcontent_data.get(position).getC_photo())
+                    .into(holder.c_photo);
+        }
+        else
+        {
+            Picasso.get()
+                    .load(R.drawable.wewo)
+                    .into(holder.c_photo);
+        }
     }
 
     @Override

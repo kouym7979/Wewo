@@ -66,7 +66,8 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                         String title=String.valueOf(shot.get(FirebaseID.title));
                                         String contents = String.valueOf(shot.get(FirebaseID.contents));
                                         String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                                        Post data = new Post(documentId, title, contents, c_nickname);
+                                        String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
+                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo);
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
                                     mAdapter = new PostAdapter(Search_Post_Activity.this,mDatas);//mDatas라는 생성자를 넣어줌
