@@ -47,7 +47,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.search_btn).setOnClickListener(this);
         findViewById(R.id.edit_button).setOnClickListener(this);
     }
-    @Override
+   /* @Override
     protected void onStart(){
         super.onStart();
         mDatas = new ArrayList<>();//
@@ -75,7 +75,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                 }
                             }
                         });
-    }
+    }*/
     @Override
     public void onClick(View v) {
         switch (v.getId())
