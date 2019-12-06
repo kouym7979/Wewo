@@ -31,7 +31,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private RecyclerView mPostRecyclerView;
     private PostAdapter mAdapter;
-    private List<Post> mDatas;
+        private List<Post> mDatas;
     private EditText search;
     private Button s_btn;
     private String search_edit,post_n;
