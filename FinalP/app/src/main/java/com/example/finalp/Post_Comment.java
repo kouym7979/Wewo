@@ -48,6 +48,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     private TextView com_text;
     private TextView com_nick;
     private ImageView com_photo;
+    private ImageView com_photo2;
     private PostContentAdapter contentAdapter;
     private RecyclerView mCommentRecyclerView;
     private List<Content> mcontent;
@@ -66,7 +67,8 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_title = (TextView) findViewById(R.id.Comment_title);//제목
         com_text = (TextView) findViewById(R.id.Comment_text);//본문
         com_edit = (EditText) findViewById(R.id.Edit_comment);//댓글 작성 내용
-        com_photo = (ImageView) findViewById(R.id.Comment_photo); //작성자 이미지
+        com_photo = (ImageView) findViewById(R.id.Comment_photo); //작성자 프로필 이미지
+        com_photo2 =  (ImageView) findViewById(R.id.Comment_photo2); //작성자가 올린 이미지
         mCommentRecyclerView = findViewById(R.id.comment_recycler);//코멘트 리사이클러뷰
         Intent intent = getIntent();//데이터 전달받기
         com_pos = intent.getExtras().getInt("position");
@@ -98,6 +100,17 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             Picasso.get()
                     .load(R.drawable.wewo)
                     .into(com_photo);
+        }
+
+        if ( !intent.getExtras().getString("post_photo").isEmpty()) {
+            Log.d("피포토2", intent.getExtras().getString("post_photo"));
+            Picasso.get()
+                    .load(intent.getStringExtra("post_photo"))
+                    .into(com_photo2);
+        }
+        else
+        {
+            com_photo2.setVisibility(View.GONE);
         }
 
 
