@@ -12,20 +12,28 @@ public class Post {
     private String p_photo;//게시글 작성자 사진
     @ServerTimestamp
     private Date date;
+    private String post_num;
     public Post() {//빈생성자 생성
 
     }
 
 
-    public Post(String documentId, String title, String contents, String p_nickname, String p_photo) {//String p_nickname 잠시 보류
+    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num) {//String p_nickname 잠시 보류
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;
         this.p_nickname=p_nickname;
         this.p_photo=p_photo;
+        this.post_num=post_num;
     }
 
+    public String getPost_num() {
+        return post_num;
+    }
 
+    public void setPost_num(String post_num) {
+        this.post_num = post_num;
+    }
 
     //alt+insert키르 누르면 클래스에 필요한 메소드 자동생성 가능
     public String getDocumentId() {
@@ -69,9 +77,14 @@ public class Post {
     }
 
 
+
     public String getP_photo() {
         return p_photo;
+      
+       public void setP_photo(String p_photo) {
+        this.p_photo = p_photo;
     }
+
 
     @Override
     public String toString() {
@@ -82,12 +95,8 @@ public class Post {
                 ", p_nickname='" + p_nickname + '\'' +
                 ", p_photo='" + p_photo + '\'' +
                 ", date=" + date +
+                ", post_num='" + post_num + '\'' +
                 '}';
     }
-
-    public void setP_photo(String p_photo) {
-        this.p_photo = p_photo;
-    }
-
-
 }
+ 
