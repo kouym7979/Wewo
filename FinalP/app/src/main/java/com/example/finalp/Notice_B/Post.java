@@ -11,20 +11,26 @@ public class Post {
     private String p_nickname;//게시글 작성자 닉네임
     @ServerTimestamp
     private Date date;
+    private String post_num;
     public Post() {//빈생성자 생성
 
     }
 
-
-    public Post(String documentId, String title, String contents, String p_nickname) {//String p_nickname 잠시 보류
+    public Post(String documentId, String title, String contents, String p_nickname, String post_num) {//String p_nickname 잠시 보류
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;
         this.p_nickname=p_nickname;
-
+        this.post_num=post_num;
     }
 
+    public String getPost_num() {
+        return post_num;
+    }
 
+    public void setPost_num(String post_num) {
+        this.post_num = post_num;
+    }
 
     //alt+insert키르 누르면 클래스에 필요한 메소드 자동생성 가능
     public String getDocumentId() {
@@ -66,6 +72,8 @@ public class Post {
     public void setP_nickname(String p_nickname) {
         this.p_nickname = p_nickname;
     }
+
+
     @Override
     public String toString() {
         return "Post{" +
@@ -74,8 +82,7 @@ public class Post {
                 ", contents='" + contents + '\'' +
                 ", p_nickname='" + p_nickname + '\'' +
                 ", date=" + date +
+                ", post_num='" + post_num + '\'' +
                 '}';
     }
-
-
 }

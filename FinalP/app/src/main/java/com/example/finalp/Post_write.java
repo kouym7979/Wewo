@@ -3,6 +3,7 @@ package com.example.finalp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +28,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
     private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
     private EditText mTitle,mContents;//제목, 내용
     private String p_nickname;//게시판에 표기할 닉네잉 //이게 가져온 값을 저장하는 임시 변수
-    private int post_num=0;
+    private String post_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,20 +55,25 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                         }
                     });
         }
+        Intent intent=getIntent();
+        post_num=intent.getStringExtra("post");
+        Log.d("확인","여기는 게시글 작성위:"+post_num);
     }
     @Override
     public void onClick(View v) {
-        post_num++;//작성버튼이 눌리면 게시글넘버 1증가
+
         if(mAuth.getCurrentUser()!=null){
             String PostID=mStore.collection("Post").document().getId();//제목이 같아도 게시글이 겹치지않게
-
+            Intent intent=getIntent();
+            post_num=intent.getStringExtra("post");
+            Log.d("확인","여기는 게시글 작성:"+post_num);
             Map<String,Object> data=new HashMap<>();
             data.put(FirebaseID.documentId,mAuth.getCurrentUser().getUid());//유저 고유번호
             data.put(FirebaseID.title,mTitle.getText().toString());//게시글제목
             data.put(FirebaseID.contents,mContents.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
             data.put(FirebaseID.nickname,p_nickname);
-            //data.put(FirebaseID.post_time,)
+            data.put(FirebaseID.post_num,post_num);
             mStore.collection("Post").add(data);//Post라는 테이블에 데이터를 입력하는것
             finish();
         }
