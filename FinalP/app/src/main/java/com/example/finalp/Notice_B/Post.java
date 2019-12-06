@@ -25,6 +25,7 @@ public class Post {
         this.p_nickname=p_nickname;
         this.p_photo=p_photo;
         this.post_num=post_num;
+
     }
 
     public String getPost_num() {
@@ -80,11 +81,10 @@ public class Post {
 
     public String getP_photo() {
         return p_photo;
-      
+
        public void setP_photo(String p_photo) {
         this.p_photo = p_photo;
     }
-
 
     @Override
     public String toString() {
@@ -98,5 +98,7 @@ public class Post {
                 ", post_num='" + post_num + '\'' +
                 '}';
     }
+
+
+
 }
- 

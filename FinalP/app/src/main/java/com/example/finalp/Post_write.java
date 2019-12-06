@@ -31,8 +31,10 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
     private FirebaseFirestore mStore=FirebaseFirestore.getInstance();
     private EditText mTitle,mContents;//제목, 내용
     private String p_nickname;//게시판에 표기할 닉네잉 //이게 가져온 값을 저장하는 임시 변수
+
     private String photoUrl; //사진 저장 변수
     private String post_num;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,8 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                         }
                     });
         }
+
+
         //사진 불러오기
         FirebaseUser user= mAuth.getCurrentUser();
         if(user!=null) {
@@ -71,6 +75,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                 photoUrl = user.getPhotoUrl().toString();
             }
         }
+
         Intent intent=getIntent();
         post_num=intent.getStringExtra("post");
         Log.d("확인","여기는 게시글 작성위:"+post_num);
@@ -91,10 +96,12 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
             data.put(FirebaseID.contents,mContents.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
             data.put(FirebaseID.nickname,p_nickname);
+
             data.put(FirebaseID.p_photo,photoUrl);
             //data.put(FirebaseID.nickname,p_nickname);
             //data.put(FirebaseID.post_time,)
             data.put(FirebaseID.post_num,post_num);
+
             mStore.collection("Post").add(data);//Post라는 테이블에 데이터를 입력하는것
             finish();
         }
