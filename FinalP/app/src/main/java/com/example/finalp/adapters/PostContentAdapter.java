@@ -3,6 +3,7 @@ package com.example.finalp.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class PostContentAdapter extends RecyclerView.Adapter<PostContentAdapter.
         Content data=mcontent_data.get(position);
         holder.c_nickname.setText(mcontent_data.get(position).getC_nickname());
         holder.comment.setText(mcontent_data.get(position).getComment());
+        holder.c_photo.setImageResource(R.drawable.wewo); //일단 임시로 wewo 이미지로 해놈
     }
 
     @Override
@@ -43,11 +45,12 @@ public class PostContentAdapter extends RecyclerView.Adapter<PostContentAdapter.
 
         private TextView c_nickname;
         private TextView comment;
-
+        private ImageView c_photo;
         public PostContentViewHolder(@NonNull View itemView) {
             super(itemView);
             c_nickname=itemView.findViewById(R.id.comment_item_nickname);
             comment=itemView.findViewById(R.id.comment_contents);
+            c_photo=itemView.findViewById(R.id.comment_item_photo);
         }
     }
 }

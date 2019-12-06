@@ -46,6 +46,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     private Button s_btn;
     private String edit_s;//검색어 저장용도
     private EditText search_edit;//검색어 에딧
+    private String post_n;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,9 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         mPostRecyclerView = findViewById(R.id.recyclerview);
         findViewById(R.id.edit_button).setOnClickListener(this);
         findViewById(R.id.search_btn).setOnClickListener(this);
+        Intent intent=getIntent();
+        post_n=intent.getStringExtra("post");
+        Log.d("확인","여기는 노티스:"+post_n);
     }
 
     @Override
@@ -92,6 +96,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
+                .whereEqualTo("post_num",post_n)
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
@@ -105,7 +110,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String title = String.valueOf(shot.get(FirebaseID.title));
                                         String contents = String.valueOf(shot.get(FirebaseID.contents));
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
-                                        Post data = new Post(documentId, title, contents, p_nickname);
+                                        Post data = new Post(documentId, title, contents, p_nickname,post_n);
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
                                     mAdapter = new PostAdapter(NoticeBoardActivity.this, mDatas);//mDatas라는 생성자를 넣어줌
@@ -119,7 +124,11 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.edit_button:
-                startActivity(new Intent(this, Post_write.class));
+                Intent intent2=new Intent(this,Post_write.class);
+                //post_n=intent2.getStringExtra("post");
+                intent2.putExtra("post",post_n);
+                Log.d("확인","여기는 게시글:"+post_n);
+                startActivity(intent2);
                 break;
             case R.id.search_btn:
                 Intent intent=new Intent(this,Search_Post_Activity.class);

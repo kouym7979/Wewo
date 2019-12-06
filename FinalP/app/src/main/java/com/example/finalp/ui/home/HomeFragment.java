@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.finalp.HomeActivity;
+import com.example.finalp.NoticeActivity;
 import com.example.finalp.NoticeBoardActivity;
 import com.example.finalp.R;
 
@@ -38,23 +39,39 @@ public class HomeFragment extends Fragment {
                     switch (view.getId()) {
                         case R.id.post1 :
                             Toast.makeText(context,"외국인 친구찾기 게시판",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getActivity(),NoticeBoardActivity.class));//일단 하나만 연동
+                            Intent intent=new Intent(getActivity(),NoticeBoardActivity.class);
+                            intent.putExtra("post","post1");
+                            Log.d("확인","여기는 게시글 작성:");
+                            startActivity(intent);
+                            //startActivity(new Intent(getActivity(),NoticeBoardActivity.class));//일단 하나만 연동
                             break ;
                         case R.id.post2 :
                             Toast.makeText(context,"한국인 친구 찾기 게시판",Toast.LENGTH_SHORT).show();
-
+                            Intent intent2=(new Intent(getActivity(),NoticeBoardActivity.class));
+                            intent2.putExtra("post","post2");
+                            startActivity(intent2);
                             break ;
                         case R.id.post3 :
                             Toast.makeText(context,"한국의 문화 예절 게시판",Toast.LENGTH_SHORT).show();
+                            Intent intent3=(new Intent(getActivity(),NoticeBoardActivity.class));
+                            intent3.putExtra("post","post3");
+                            startActivity(intent3);
                             break ;
                         case R.id.post4 :
                             Toast.makeText(context,"외국인 학생 질문 게시판",Toast.LENGTH_SHORT).show();
+                            Intent intent4=(new Intent(getActivity(),NoticeBoardActivity.class));
+                            intent4.putExtra("post","post4");
+                            startActivity(intent4);
                             break ;
                         case R.id.post5 :
                             Toast.makeText(context,"장터 게시판",Toast.LENGTH_SHORT).show();
+                            Intent intent5=(new Intent(getActivity(),NoticeBoardActivity.class));
+                            intent5.putExtra("post","post5");
+                            startActivity(intent5);
                             break ;
                         case R.id.post6 :
                             Toast.makeText(context,"공지사항",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getActivity(), NoticeActivity.class));
                             break ;
                     }
                 }
