@@ -81,6 +81,7 @@ public class Post {
 
     public String getP_photo() {
         return p_photo;
+    }
 
        public void setP_photo(String p_photo) {
         this.p_photo = p_photo;
