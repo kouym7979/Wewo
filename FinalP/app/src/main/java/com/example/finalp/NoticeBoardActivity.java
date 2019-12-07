@@ -34,6 +34,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.valueOf;
+
 public class NoticeBoardActivity extends AppCompatActivity implements View.OnClickListener, PostAdapter.EventListener {
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -102,9 +104,13 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
+
+                                        int like = FirebaseID.like;
+                                        
                                         String post_id=String.valueOf(shot.get(FirebaseID.post_id));
                                         String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
-                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id);
+                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id,like);
+
 
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }

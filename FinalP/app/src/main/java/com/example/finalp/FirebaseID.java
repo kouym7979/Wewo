@@ -18,8 +18,8 @@ public class FirebaseID {
     public static String comment="conmment";//댓글
     public static String c_photo="c_photo"; //댓글 작성자 사진
     public static String post_position="post_position";//몇번째 게시글인지 알기위해
-
+    public static String post_time="post_time";
     public static String post_num="post_num";//게시글의 넘버
+    public static int like=0;//좋아요 갯수
     public static String post_id="post_id";
     public static String writer_id="writer_id";//게시글 작성자의 uid 저장용
-}

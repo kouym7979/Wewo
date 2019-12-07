@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
     private EditText mTitle,mContents;//제목, 내용
     private String p_nickname;//게시판에 표기할 닉네잉 //이게 가져온 값을 저장하는 임시 변수
     private ImageButton post_photo;
+    private ProgressBar post_progressBar;
     private String photoUrl; //사진 저장 변수
     private String post_num,post_id,writer_id;
     private Uri uriProfileImage;
@@ -67,7 +69,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
         post_photo =findViewById(R.id.Post_photo);
         post_imageView = findViewById(R.id.post_imageview);
         post_imageView.setVisibility(View.INVISIBLE);
-
+        post_progressBar = findViewById(R.id.post_progressbar);
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())// 여기 콜렉션 패스 경로가 중요해 보면 패스 경로가 user로 되어있어서
                     //우리 파이어베이스의 user 컬렉션의 정보를 가져올 수 있어. email, password, Uid(주민번호같은 거), nickname
@@ -141,12 +143,12 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
 
         if(uriProfileImage !=null)
         {
-           // progressBar.setVisibility(View.VISIBLE);
+            post_progressBar.setVisibility(View.VISIBLE);
             profileImageRef.putFile(uriProfileImage)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //progressBar.setVisibility(View.GONE);
+                            post_progressBar.setVisibility(View.GONE);
                             profileImageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
@@ -159,7 +161,8 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            //progressBar.setVisibility(View.GONE);
+
+                            post_progressBar.setVisibility(View.GONE);
 
                         }
                     });
@@ -192,7 +195,11 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
             //data.put(FirebaseID.nickname,p_nickname);
             data.put(FirebaseID.post_id,PostID);//게시글 ID번호
             data.put(FirebaseID.post_num,post_num);
+
+            data.put("like", 0); //like의 개수를 0으로 초기화
+
             data.put(FirebaseID.writer_id,writer_id);
+
             if(!TextUtils.isEmpty(postImageUrl))
             {
                 data.put(FirebaseID.post_photo,postImageUrl);
