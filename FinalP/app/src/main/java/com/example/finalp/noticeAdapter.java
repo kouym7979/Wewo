@@ -78,7 +78,6 @@ public class noticeAdapter extends RecyclerView.Adapter<noticeAdapter.ViewHolder
             super(itemView);
             title=itemView.findViewById(R.id.title_text);
             contents=itemView.findViewById(R.id.contents_text);
-
             more = itemView.findViewById(R.id.more_button);
         }
     }

@@ -196,7 +196,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
             data.put(FirebaseID.post_id,PostID);//게시글 ID번호
             data.put(FirebaseID.post_num,post_num);
 
-            data.put("like", 0); //like의 개수를 0으로 초기화
+            data.put(FirebaseID.like,"0"); //like의 개수를 0으로 초기화
 
             data.put(FirebaseID.writer_id,writer_id);
 
