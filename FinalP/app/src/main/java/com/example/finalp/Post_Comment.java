@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -52,7 +53,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Post_Comment extends AppCompatActivity implements View.OnClickListener {
-
+    SharedPreferences.Editor prefEditor;
+    SharedPreferences prefs;
     private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private TextView com_title;
@@ -67,7 +69,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     private String comment_p,post_t,post_num;//
     String sub_pos;//코멘트에 들어가있는 게시글의 위치
     int com_pos = 0;//게시글의 등록된 위치
-
+    int like=0;
     private ToggleButton likeButton; //좋아요 버튼
     private TextView likeText; //좋아요 갯수보여주는 텍스트
 
@@ -94,17 +96,20 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_text.setText(intent.getStringExtra("content"));
         com_title.setText(intent.getStringExtra("title"));
 
+        //likeText.setText(intent.getStringExtra("like").toString());
+        like= Integer.parseInt(intent.getStringExtra("like"));
         likeText.setText(intent.getStringExtra("like").toString());
-
         uid=intent.getStringExtra("uid");//게시글 작성자의 uid를 받아옴
         post_id=intent.getStringExtra("post_id");
         writer_id_post=intent.getStringExtra("writer_id");
         post_num=intent.getStringExtra("number");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setTitle("Foreign Post");
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean tgpref = preferences.getBoolean("tgpref", false);  //default is true
 
+        likeButton.setChecked(tgpref);
         //사진 불러오기
         FirebaseUser user= mAuth.getCurrentUser();
         if(user!=null) {
@@ -174,11 +179,26 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 if(likeButton.isChecked()){
-                    Log.d("토글좋아요켜짐", "켜짐");
-
+                    Log.d("토글", "켜짐");
+                    like++;
+                    mStore.collection("Post").document(post_id)
+                            .update("like",Integer.toString(like));
+                    Log.d("토글", "켜짐"+like);
+                    likeText.setText(Integer.toString(like));
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("tgpref", true); // value to store
+                    editor.commit();
                 }
                 else{
-                    Log.d("토글좋아요꺼짐", "꺼짐");
+                    Log.d("토글", "꺼짐");
+                    like--;
+                    mStore.collection("Post").document(post_id)
+                            .update("like", Integer.toString(like));
+                    Log.d("토글", "꺼짐"+like);
+                    likeText.setText(Integer.toString(like));
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("tgpref", false); // value to store
+                    editor.commit();
                 }
             }
         });

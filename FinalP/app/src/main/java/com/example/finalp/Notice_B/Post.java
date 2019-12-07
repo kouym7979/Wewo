@@ -11,7 +11,7 @@ public class Post {
     private String p_nickname;//게시글 작성자 닉네임
     private String p_photo;//게시글 작성자 사진
     private String post_photo; //게시글에 등록할 사진
-    private int like; //게시글 좋아요 개수
+    private String like; //게시글 좋아요 개수
     @ServerTimestamp
     private Date date;
     private String post_num;
@@ -23,7 +23,7 @@ public class Post {
 
 
 
-    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo, String post_id, String writer_id,int like) {//String p_nickname 잠시 보류
+    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo, String post_id, String writer_id,String like) {//String p_nickname 잠시 보류
 
         this.documentId = documentId;
         this.title = title;
@@ -116,14 +116,13 @@ public class Post {
         this.post_photo = post_photo;
     }
 
-    public int getLike() {
+    public String getLike() {
         return like;
     }
 
-    public void setLike(int like) {
+    public void setLike(String like) {
         this.like = like;
     }
-
 
     public String getWriter_id() {
         return writer_id;
@@ -141,7 +140,7 @@ public class Post {
                 ", p_nickname='" + p_nickname + '\'' +
                 ", p_photo='" + p_photo + '\'' +
                 ", post_photo='" + post_photo + '\'' +
-                ", like=" + like +
+                ", like='" + like + '\'' +
                 ", date=" + date +
                 ", post_num='" + post_num + '\'' +
                 ", post_id='" + post_id + '\'' +

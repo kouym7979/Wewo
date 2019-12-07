@@ -120,9 +120,13 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
+                                        Log.d("콘텐츠값", String.valueOf(shot));
 
-                                        int like = FirebaseID.like;
-                                        
+                                        Log.d("라이크값",String.valueOf(shot.get(FirebaseID.like)));
+                                        Log.d("다큐멘트값",String.valueOf(snap.getData().get(FirebaseID.like)));
+                                        String like=String.valueOf(shot.get(FirebaseID.like));
+                                        //int like = FirebaseID.like;
+
                                         String post_id=String.valueOf(shot.get(FirebaseID.post_id));
                                         String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
                                         Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id,like);
