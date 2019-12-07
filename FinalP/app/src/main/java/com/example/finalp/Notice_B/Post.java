@@ -11,6 +11,7 @@ public class Post {
     private String p_nickname;//게시글 작성자 닉네임
     private String p_photo;//게시글 작성자 사진
     private String post_photo; //게시글에 등록할 사진
+    private int like; //게시글 좋아요 개수
     @ServerTimestamp
     private Date date;
     private String post_num;
@@ -20,7 +21,10 @@ public class Post {
 
     }
 
-    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo, String post_id, String writer_id) {//String p_nickname 잠시 보류
+
+
+    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo, String post_id, String writer_id,int like) {//String p_nickname 잠시 보류
+
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;
@@ -28,6 +32,7 @@ public class Post {
         this.p_photo=p_photo;
         this.post_num=post_num;
         this.post_photo=post_photo;
+        this.like = like;
         this.post_id=post_id;
         this.writer_id=writer_id;
 
@@ -35,6 +40,7 @@ public class Post {
 
     public String getPost_id() {
         return post_id;
+
     }
 
     public void setPost_id(String post_id) {
@@ -109,12 +115,23 @@ public class Post {
     public void setPost_photo(String post_photo) {
         this.post_photo = post_photo;
     }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+
     public String getWriter_id() {
         return writer_id;
     }
     public void setWriter_id(String writer_id) {
         this.writer_id = writer_id;
     }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -124,6 +141,7 @@ public class Post {
                 ", p_nickname='" + p_nickname + '\'' +
                 ", p_photo='" + p_photo + '\'' +
                 ", post_photo='" + post_photo + '\'' +
+                ", like=" + like +
                 ", date=" + date +
                 ", post_num='" + post_num + '\'' +
                 ", post_id='" + post_id + '\'' +

@@ -61,6 +61,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.p_nickname.setText(datas.get(position).getP_nickname());
         holder.title.setText(datas.get(position).getTitle());//각각 데이터에 들어있는 제목 내용들이 각각 하나고 여러개가 아니기때문에
         holder.contents.setText(datas.get(position).getContents());//리스트로 만들어 주기 위해서
+        holder.post_like_text.setText(String.valueOf(datas.get(position).getLike()));
+
         if ( !datas.get(position).getPost_photo().isEmpty()) {
             Picasso.get()
                     .load(datas.get(position).getPost_photo())
@@ -91,6 +93,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     intent.putExtra("post_id",datas.get(posi).getPost_id());
                     intent.putExtra("number",datas.get(posi).getPost_num());//게시글의 넘버를 넘겨줌
                     intent.putExtra("position",posi);//게시글의 위치를 넘겨줌
+                    intent.putExtra("like",String.valueOf(datas.get(position).getLike()));
                     intent.putExtra("writer_id",datas.get(posi).getWriter_id());//사용자의 uid
                     //intent.putExtra("title",datas.get(pos).title);
                     mcontext.startActivity(intent);
@@ -115,14 +118,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private TextView contents;
         private TextView p_nickname;
         private ImageView post_photo;
+        private TextView post_like_text;
         public PostViewHolder(@NonNull final View itemView) {//포스트 뷰홀더의 생성자
             super(itemView);
-
             title=itemView.findViewById(R.id.post_title);
             contents=itemView.findViewById(R.id.post_contents);
             p_nickname=itemView.findViewById(R.id.post_writer);
             post_photo=itemView.findViewById(R.id.post_imageView);
-
+            post_like_text = itemView.findViewById(R.id.post_liketext);
         }
 
 
