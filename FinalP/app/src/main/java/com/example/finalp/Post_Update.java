@@ -164,9 +164,10 @@ public class Post_Update extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
         if(mAuth.getCurrentUser()!=null){
-            String PostID=mStore.collection("Post").document().getId();//제목이 같아도 게시글이 겹치지않게
+            //String PostID=mStore.collection("Post").document().getId();//제목이 같아도 게시글이 겹치지않게
             Intent intent=getIntent();
             post_num=intent.getStringExtra("number");
+            post_id=intent.getStringExtra("Postid");
             Log.d("확인","여기는 게시글 작성:"+post_num);
             Map<String,Object> data=new HashMap<>();
             data.put(FirebaseID.documentId,mAuth.getCurrentUser().getUid());//유저 고유번호
@@ -176,18 +177,19 @@ public class Post_Update extends AppCompatActivity implements View.OnClickListen
             data.put(FirebaseID.nickname,p_nickname);
             data.put(FirebaseID.p_photo,photoUrl);
             data.put(FirebaseID.post_num,post_num);
-            data.put(FirebaseID.post_id,PostID);//게시글 ID번호
+            data.put(FirebaseID.post_id,intent.getStringExtra("Postid"));//게시글 ID번호
             data.put(FirebaseID.writer_id,writer_id);
             if(!TextUtils.isEmpty(postImageUrl))
             {
                 data.put(FirebaseID.post_photo,postImageUrl);
             }
-            mStore.collection("Post").document(intent.getStringExtra("Postid")).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            mStore.collection("Post").document(post_id).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(),"Update complite",Toast.LENGTH_SHORT).show();
                 }
             });//Post라는 테이블에 데이터를 입력하는것/ 문서 이름을 PostID로 등록
-            //startActivity(new Intent(this,Post_Comment.class));
+            startActivity(new Intent(this,NoticeBoardActivity.class));
             finish();
         }
     }
