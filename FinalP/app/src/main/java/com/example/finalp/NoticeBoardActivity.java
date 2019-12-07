@@ -56,7 +56,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Foreign Post");
+
         search_edit=findViewById(R.id.edit_search);
         edit_s=search_edit.getText().toString();
         mPostRecyclerView = findViewById(R.id.recyclerview);
@@ -64,6 +64,22 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.search_btn).setOnClickListener(this);
         Intent intent=getIntent();
         post_n=intent.getStringExtra("post");
+        if(post_n.equals("post1")){
+            getSupportActionBar().setTitle("Foreign Post");
+        }
+        else if(post_n.equals("post2")){
+            getSupportActionBar().setTitle("Find Korean Friends ");
+        }
+        else if(post_n.equals("post3")){
+            getSupportActionBar().setTitle("Korean Ettique");
+        }
+        else if(post_n.equals("post4")){
+            getSupportActionBar().setTitle("Question Board");
+        }
+        else if(post_n.equals("post5")){
+            getSupportActionBar().setTitle("Flea Market");
+        }
+
         Log.d("확인","여기는 노티스:"+post_n);
     }
 

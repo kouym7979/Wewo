@@ -28,17 +28,13 @@ import com.example.finalp.Search_Post_Activity;
 public class HomeFragment extends Fragment {
 
     private Context context;
-    private EditText search;
-    private String edit;
-    private Button s_btn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_home, container, false);
         context = container.getContext();
-        search=view.findViewById(R.id.search);
-        edit=search.getText().toString();
+
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -79,12 +75,6 @@ public class HomeFragment extends Fragment {
                             Toast.makeText(context,"공지사항",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getActivity(), NoticeActivity.class));
                             break ;
-                        case R.id.searchBtn:
-                            Intent intent6=(new Intent(getActivity(), Search_Post_Activity.class));
-                            intent6.putExtra("search",edit);
-                            startActivity(intent6);
-                            break ;
-
                     }
                 }
             } ;
@@ -100,8 +90,7 @@ public class HomeFragment extends Fragment {
         post5_button.setOnClickListener(onClickListener) ;
         Button post6_button = (Button) view.findViewById(R.id.post6) ;
         post6_button.setOnClickListener(onClickListener) ;
-        Button s_btn=(Button)view.findViewById(R.id.searchBtn);
-        s_btn.setOnClickListener(onClickListener);
+
         return view;
     }
 }
