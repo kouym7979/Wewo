@@ -66,7 +66,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mCommentRecyclerView;
     private List<Content> mcontent;
     private EditText com_edit;
-    private String comment_p,post_t,post_num;//
+    private String comment_p,post_t,post_num,comment_post;//
     String sub_pos;//코멘트에 들어가있는 게시글의 위치
     int com_pos = 0;//게시글의 등록된 위치
     int like=0;
@@ -105,7 +105,7 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         post_num=intent.getStringExtra("number");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Foreign Post");
+
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         boolean tgpref = preferences.getBoolean("tgpref", false);  //default is true
 
@@ -263,7 +263,8 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                                                 String comment = String.valueOf(shot.get(FirebaseID.comment));
                                                 String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                                 String c_photo = String.valueOf(shot.get(FirebaseID.c_photo));
-                                                Content data = new Content(documentId, c_nickname, comment,  Integer.toString(com_pos),post_t,c_photo);
+                                                String num_comment=String.valueOf(shot.get(FirebaseID.comment_post));
+                                                Content data = new Content(documentId, c_nickname, comment,  Integer.toString(com_pos),post_t,c_photo,num_comment);
                                                 mcontent.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                             }
                                         }
@@ -287,9 +288,11 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
             Intent intent = getIntent();//데이터 전달받기
             data.put(FirebaseID.title,post_t);//게시글의 제목을 넣어준다 비교하기위해서
             //Log.d("확인",po)
+            comment_post=intent.getStringExtra("post_id");
             com_pos = intent.getExtras().getInt("position");//Post 콜렉션의 게시글 등록위치를 전달받아옴
             //Log.d("확인","위치"+com_pos);
             data.put(FirebaseID.post_position, Integer.toString(com_pos));//작성된 게시판의 위치를 댓글에 저장
+            data.put(FirebaseID.comment_post,comment_post);
             mStore.collection("Comment").add(data);//댓글 콜렉션에 저장
             View view = this.getCurrentFocus();//작성버튼을 누르면 에딧텍스트 키보드 내리게 하기
             if (view != null) {//댓글작성시 키보드 내리고 댓글에 작성한 내용 초기화
