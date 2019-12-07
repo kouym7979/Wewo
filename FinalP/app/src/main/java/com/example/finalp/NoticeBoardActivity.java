@@ -64,10 +64,10 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.search_btn).setOnClickListener(this);
         Intent intent=getIntent();
         post_n=intent.getStringExtra("post");
-        if(post_n.equals("post1")){
-            getSupportActionBar().setTitle("Foreign Post");
-        }
-        else if(post_n.equals("post2")){
+        //if(post_n.equals("post1")){
+            getSupportActionBar().setTitle("Board");
+       // }
+       /* else if(post_n.equals("post2")){
             getSupportActionBar().setTitle("Find Korean Friends ");
         }
         else if(post_n.equals("post3")){
@@ -78,7 +78,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         }
         else if(post_n.equals("post5")){
             getSupportActionBar().setTitle("Flea Market");
-        }
+        }*/
 
         Log.d("확인","여기는 노티스:"+post_n);
     }
@@ -104,7 +104,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
-                //.whereEqualTo("post_num",post_n)
+                .whereEqualTo("post_num",post_n)
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {

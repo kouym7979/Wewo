@@ -42,7 +42,7 @@ public class Post_Update extends AppCompatActivity implements View.OnClickListen
     private String p_nickname;//게시판에 표기할 닉네잉 //이게 가져온 값을 저장하는 임시 변수
     private ImageButton post_photo;
     private String photoUrl; //사진 저장 변수
-    private String post_num,post_id,writer_id;
+    private String post_num,post_id,writer_id,comment_post;
     private Uri uriProfileImage;
     private ImageView post_imageView;
     private String postImageUrl;
@@ -179,6 +179,7 @@ public class Post_Update extends AppCompatActivity implements View.OnClickListen
             data.put(FirebaseID.post_num,post_num);
             data.put(FirebaseID.post_id,intent.getStringExtra("Postid"));//게시글 ID번호
             data.put(FirebaseID.writer_id,writer_id);
+
             if(!TextUtils.isEmpty(postImageUrl))
             {
                 data.put(FirebaseID.post_photo,postImageUrl);
@@ -189,7 +190,7 @@ public class Post_Update extends AppCompatActivity implements View.OnClickListen
                     Toast.makeText(getApplicationContext(),"Update complite",Toast.LENGTH_SHORT).show();
                 }
             });//Post라는 테이블에 데이터를 입력하는것/ 문서 이름을 PostID로 등록
-            startActivity(new Intent(this,NoticeBoardActivity.class));
+            //startActivity(new Intent(this,NoticeBoardActivity.class));
             finish();
         }
     }
