@@ -11,7 +11,7 @@ public class FirebaseID {
     public static String nation="nation";
     public static String p_photo="p_photo";
     public static String post_photo="post_photo";
-    public static String comment_nick="comment_nick";//댓글 작성자
+
     public static String title="title";
     public static String contents="contents";
     public static String timestamp="timestamp";
@@ -21,4 +21,5 @@ public class FirebaseID {
     public static String post_time="post_time";
     public static String post_num="post_num";//게시글의 넘버
     public static int like=0;//좋아요 갯수
-}
+    public static String post_id="post_id";
+    public static String writer_id="writer_id";//게시글 작성자의 uid 저장용

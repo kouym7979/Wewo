@@ -78,16 +78,6 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionItemSelected(MenuItem item) {
         Log.d("확인", "선택하세요");
         switch (item.getItemId()) {
-            case R.id.action_search: {
-                Log.d("확인", "클릭되었습니다");//이게안되누
-                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
-                Toast.makeText(getApplicationContext(), "Search Click", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            case R.id.btn1:{
-                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
-                Log.d("확인", "검색되었습니다");//이게안되누
-            }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -114,8 +104,13 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
+
                                         int like = FirebaseID.like;
-                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo, like);
+                                        
+                                        String post_id=String.valueOf(shot.get(FirebaseID.post_id));
+                                        String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
+                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id,like);
+
 
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }

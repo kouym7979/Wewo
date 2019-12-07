@@ -89,9 +89,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     intent.putExtra("nickname",datas.get(posi).getP_nickname());
                     intent.putExtra("p_photo",datas.get(posi).getP_photo());
                     intent.putExtra("post_photo",datas.get(posi).getPost_photo());
-                    //intent.putExtra("number",datas.get(posi).getPost_num());//게시글의 넘버를 넘겨줌
+                    intent.putExtra("uid",datas.get(posi).getDocumentId());//게시글 작성자의 uid를 넘겨줌
+                    intent.putExtra("post_id",datas.get(posi).getPost_id());
+                    intent.putExtra("number",datas.get(posi).getPost_num());//게시글의 넘버를 넘겨줌
                     intent.putExtra("position",posi);//게시글의 위치를 넘겨줌
                     intent.putExtra("like",String.valueOf(datas.get(position).getLike()));
+                    intent.putExtra("writer_id",datas.get(posi).getWriter_id());//사용자의 uid
                     //intent.putExtra("title",datas.get(pos).title);
                     mcontext.startActivity(intent);
                 }

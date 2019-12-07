@@ -69,8 +69,11 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                         String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo=String.valueOf(shot.get(FirebaseID.post_photo));
-                                        int like = FirebaseID.like;
-                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo,post_n,post_photo, like);
+                                        int like = FirebaseID.like;                                        
+                                        String post_id=String.valueOf(shot.get(FirebaseID.post_id));
+                                        String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
+                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo,post_n,post_photo,post_id,writer_id,like);
+
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
                                     mAdapter = new PostAdapter(Search_Post_Activity.this,mDatas);//mDatas라는 생성자를 넣어줌
