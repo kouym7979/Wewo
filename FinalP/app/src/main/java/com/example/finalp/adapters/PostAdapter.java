@@ -119,6 +119,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private TextView p_nickname;
         private ImageView post_photo;
         private TextView post_like_text;
+
+
         public PostViewHolder(@NonNull final View itemView) {//포스트 뷰홀더의 생성자
             super(itemView);
             title=itemView.findViewById(R.id.post_title);
@@ -126,6 +128,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             p_nickname=itemView.findViewById(R.id.post_writer);
             post_photo=itemView.findViewById(R.id.post_imageView);
             post_like_text = itemView.findViewById(R.id.post_liketext);
+
+
         }
 
 
