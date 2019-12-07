@@ -12,6 +12,7 @@ public class FirebaseID {
     public static String p_photo = "p_photo";
     public static String post_photo = "post_photo";
 
+
     public static String title = "title";
     public static String contents = "contents";
     public static String timestamp = "timestamp";
