@@ -12,9 +12,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.finalp.Notice_B.Content;
 import com.example.finalp.adapters.PostContentAdapter;
@@ -58,6 +61,8 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
     int com_pos = 0;//게시글의 등록된 위치
     private String time;
     private String photoUrl; //사진 저장 변수
+    private ToggleButton likeButton; //좋아요 버튼
+    private TextView likeText; //좋아요 갯수보여주는 텍스트
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,13 +74,15 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
         com_edit = (EditText) findViewById(R.id.Edit_comment);//댓글 작성 내용
         com_photo = (ImageView) findViewById(R.id.Comment_photo); //작성자 프로필 이미지
         com_photo2 =  (ImageView) findViewById(R.id.Comment_photo2); //작성자가 올린 이미지
+        likeButton = (ToggleButton) findViewById(R.id.like_button); //좋아요 버튼
+        likeText = (TextView) findViewById(R.id.like_text); // 좋아요 개수 보여주는 텍스트
         mCommentRecyclerView = findViewById(R.id.comment_recycler);//코멘트 리사이클러뷰
         Intent intent = getIntent();//데이터 전달받기
         com_pos = intent.getExtras().getInt("position");
         com_nick.setText(intent.getStringExtra("nickname"));
         com_text.setText(intent.getStringExtra("content"));
         com_title.setText(intent.getStringExtra("title"));
-
+        likeText.setText(intent.getStringExtra("like").toString());
         //사진 불러오기
         FirebaseUser user= mAuth.getCurrentUser();
         if(user!=null) {
@@ -101,17 +108,22 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                     .load(R.drawable.wewo)
                     .into(com_photo);
         }
-
-        if ( !intent.getExtras().getString("post_photo").isEmpty()) {
-            Log.d("피포토2", intent.getExtras().getString("post_photo"));
+        String spost_photo=intent.getExtras().getString("post_photo");
+        Log.d("String spost값", spost_photo);
+        if ( !spost_photo.equals("null")) {
+            Log.d("피포토사진있음", intent.getExtras().getString("post_photo"));
             Picasso.get()
                     .load(intent.getStringExtra("post_photo"))
                     .into(com_photo2);
         }
         else
         {
+            Log.d("사진빔", "사진이 비어있어요");
+            com_photo2.getLayoutParams().height= 0;
             com_photo2.setVisibility(View.GONE);
         }
+
+
 
 
 
@@ -140,6 +152,18 @@ public class Post_Comment extends AppCompatActivity implements View.OnClickListe
                     });
         }
 
+        likeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(likeButton.isChecked()){
+                    Log.d("토글좋아요켜짐", "켜짐");
+
+                }
+                else{
+                    Log.d("토글좋아요꺼짐", "꺼짐");
+                }
+            }
+        });
     }
 
     @Override

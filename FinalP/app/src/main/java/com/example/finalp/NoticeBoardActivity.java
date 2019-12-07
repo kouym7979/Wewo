@@ -34,6 +34,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.valueOf;
+
 public class NoticeBoardActivity extends AppCompatActivity implements View.OnClickListener, PostAdapter.EventListener {
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -96,7 +98,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
-                .whereEqualTo("post_num",post_n)
+                //.whereEqualTo("post_num",post_n)
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
@@ -112,7 +114,8 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
-                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo);
+                                        int like = FirebaseID.like;
+                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo, like);
 
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }
@@ -136,6 +139,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
             case R.id.search_btn:
                 Intent intent=new Intent(this,Search_Post_Activity.class);
                 intent.putExtra("search",search_edit.getText().toString());//검색어와 관련된 것을 추리는 곳에 보냄
+                intent.putExtra("post",post_n);
                 startActivity(intent);
                 Log.d("확인","여기는 포스트 코멘트:"+search_edit.getText().toString());
                 break;
