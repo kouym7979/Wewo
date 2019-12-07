@@ -96,7 +96,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
-                .whereEqualTo("post_num",post_n)
+                //.whereEqualTo("post_num",post_n)
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
