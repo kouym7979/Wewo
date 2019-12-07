@@ -76,16 +76,6 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionItemSelected(MenuItem item) {
         Log.d("확인", "선택하세요");
         switch (item.getItemId()) {
-            case R.id.action_search: {
-                Log.d("확인", "클릭되었습니다");//이게안되누
-                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
-                Toast.makeText(getApplicationContext(), "Search Click", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            case R.id.btn1:{
-                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
-                Log.d("확인", "검색되었습니다");//이게안되누
-            }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -96,7 +86,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
-                .whereEqualTo("post_num",post_n)
+                //.whereEqualTo("post_num",post_n)
                 .orderBy(FirebaseID.timestamp, Query.Direction.DESCENDING)//시간정렬순으로
                 .addSnapshotListener(
                         new EventListener<QuerySnapshot>() {
@@ -112,7 +102,9 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
-                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo);
+                                        String post_id=String.valueOf(shot.get(FirebaseID.post_id));
+                                        String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
+                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id);
 
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
                                     }

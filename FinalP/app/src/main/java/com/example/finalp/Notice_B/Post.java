@@ -14,12 +14,13 @@ public class Post {
     @ServerTimestamp
     private Date date;
     private String post_num;
+    private String post_id;
+    private String writer_id;
     public Post() {//빈생성자 생성
 
     }
 
-
-    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo) {//String p_nickname 잠시 보류
+    public Post(String documentId, String title, String contents, String p_nickname, String p_photo, String post_num, String post_photo, String post_id, String writer_id) {//String p_nickname 잠시 보류
         this.documentId = documentId;
         this.title = title;
         this.contents = contents;
@@ -27,8 +28,20 @@ public class Post {
         this.p_photo=p_photo;
         this.post_num=post_num;
         this.post_photo=post_photo;
+        this.post_id=post_id;
+        this.writer_id=writer_id;
 
     }
+
+    public String getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(String post_id) {
+        this.post_id = post_id;
+    }
+
+
 
     public String getPost_num() {
         return post_num;
@@ -96,7 +109,12 @@ public class Post {
     public void setPost_photo(String post_photo) {
         this.post_photo = post_photo;
     }
-
+    public String getWriter_id() {
+        return writer_id;
+    }
+    public void setWriter_id(String writer_id) {
+        this.writer_id = writer_id;
+    }
     @Override
     public String toString() {
         return "Post{" +
@@ -108,9 +126,9 @@ public class Post {
                 ", post_photo='" + post_photo + '\'' +
                 ", date=" + date +
                 ", post_num='" + post_num + '\'' +
+                ", post_id='" + post_id + '\'' +
+                ", writer_id='" + writer_id + '\'' +
                 '}';
     }
-
-
 
 }
