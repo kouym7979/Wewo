@@ -35,10 +35,8 @@ public class FAQActivity extends AppCompatActivity implements noticefaqAdapter.M
                 "따라서 외국인 학생 친구 사귀기 게시판이나 한국인 친구 사귀기 게시판 상관없이 " +
                 "자신을 소개하고 싶은 게시판을 선택하시면 좋을 것 같습니다"+'\n'+
                 "자신이 한국인인데 외국인 친구를 사귀고 싶다면 외국인 친구 사귀기 게시판을 이용하면 좋겠죠?"));
-        dataList.add(new faqCardItem("이용 시 주의사항 및 규칙", "WEWO는 현재 한국에 거주중인 유학생들과 한국 학생들과의 원활한 소통을 위해 개설된 공간입니다." +
-                "다양한 국적의 학생들이 모인 공간인 만큼 다양한 문화와 관습이 존재하기 때문에 서로의 문화를 비방한다거나 조롱하는 행위는 삼가해 주시기 바랍니다. 적발 시 경고조치 없이 탈퇴조치 될 수 있음을 알려드립니다. 감사합니다. "));
-        dataList.add(new faqCardItem("이메일 관련 안내","가입시 이메일 아이디에는 실제 자신이 사용하는 유효한 이메일을 기입해 주시길 바랍니다."+'\n'+"" +
-                "비밀번호 분실 시 아이디에 기입된 이메일로 비밀번호 관련 정보가 발송되오니 꼭 확인해주시길 바랍니다. 감사합니다!"));
+        dataList.add(new faqCardItem("글은 어떻게 쓰나요?", "메인화면에서 원하는 게시판에 들어가셔서 오른쪽 하단에 있는 핑크색 펜 버튼을 누르신 후 글을 작성하신 후에 SAVE버튼을 누르시면 글 업로드가 완료됩니다! 감사합니다."));
+        dataList.add(new faqCardItem("비밀번호를 잃어버리면 어떻게 하나요?","로그인 화면에서 findPW를 누르신 후에 본인이 가입 시 기재하였던 이메일 주소를 기재하시고 찾기를 누르시면 됩니다!"));
 
         noticefaqAdapter adapter = new noticefaqAdapter(dataList);
         recyclerView.setAdapter(adapter);
