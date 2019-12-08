@@ -105,8 +105,7 @@ SignupActivity extends AppCompatActivity implements CompoundButton.OnCheckedChan
                                         userMap.put(FirebaseID.nickname, sNickname.getText().toString());
                                         userMap.put(FirebaseID.email, sEmail.getText().toString());//로그인에 사용할 email 아이디
                                         userMap.put(FirebaseID.password, sPw.getText().toString());//pw받고
-
-                                        userMap.put(FirebaseID.nation,nation);//여기서 파이어베이스안에 넣어줬는데 setText오류나면 어케넣어야대..?
+                                        userMap.put(FirebaseID.nation,nation);//
                                         mStore.collection(FirebaseID.user).document(user.getUid()).set(userMap, SetOptions.merge());
                                         //mStore.collection("UserInfo")//users라는 테이블에 데이터를 넣는것
                                         finish();

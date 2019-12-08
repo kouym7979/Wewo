@@ -2,6 +2,7 @@ package com.example.finalp.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,33 +20,44 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.finalp.FirebaseID;
 import com.example.finalp.HomeActivity;
 import com.example.finalp.NoticeActivity;
 import com.example.finalp.NoticeBoardActivity;
 import com.example.finalp.R;
 import com.example.finalp.Search_Post_Activity;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
-
+    private FirebaseAuth Auth = FirebaseAuth.getInstance();
+    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private Context context;
-
+    private String verify;
+    FirebaseUser user=Auth.getCurrentUser();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_home, container, false);
         context = container.getContext();
-
+        
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     switch (view.getId()) {
                         case R.id.post1 :
-                            Toast.makeText(context,"외국인 친구찾기 게시판",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(getActivity(),NoticeBoardActivity.class);
-                            intent.putExtra("post","post1");
-                            Log.d("확인","여기는 게시글 작성:");
-                            startActivity(intent);
-                            //startActivity(new Intent(getActivity(),NoticeBoardActivity.class));//일단 하나만 연동
+                                Toast.makeText(context, "외국인 친구찾기 게시판", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), NoticeBoardActivity.class);
+                                intent.putExtra("post", "post1");
+                                Log.d("확인", "여기는 게시글 작성:");
+                                startActivity(intent);
                             break ;
                         case R.id.post2 :
                             Toast.makeText(context,"한국인 친구 찾기 게시판",Toast.LENGTH_SHORT).show();

@@ -3,6 +3,7 @@ package com.example.finalp.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,6 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -96,11 +99,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     //intent.putExtra("like",String.valueOf(datas.get(position).getLike()));
                     intent.putExtra("like",datas.get(posi).getLike());
                     intent.putExtra("writer_id",datas.get(posi).getWriter_id());//사용자의 uid
+                    intent.putExtra("time",datas.get(posi).getDate());
                     //intent.putExtra("title",datas.get(pos).title);
                     mcontext.startActivity(intent);
                 }
             }
         });
+
 
         //예를들면 첫째줄에 데이터에 위치를 각각 0번째 1번째...으로 받아서 그 위치마다 0번째 데이터위치에
         //0번째 제목, 0번째 내용 이런식으로 묶어서 리스트로 만들기 위해서 모델객체를 선언, holder가 그런 것을 지정해줌

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,13 +18,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();
     private EditText Em,Pw;
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseUser currentUser;
     private CheckBox check1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +46,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
 
         check1.setChecked(pref.getBoolean("check1", false));
-
     }
 
 

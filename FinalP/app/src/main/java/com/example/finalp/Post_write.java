@@ -190,12 +190,12 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
             data.put(FirebaseID.title,mTitle.getText().toString());//게시글제목
             data.put(FirebaseID.contents,mContents.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
+
             data.put(FirebaseID.nickname,p_nickname);
             data.put(FirebaseID.p_photo,photoUrl);
-            //data.put(FirebaseID.nickname,p_nickname);
+
             data.put(FirebaseID.post_id,PostID);//게시글 ID번호
             data.put(FirebaseID.post_num,post_num);
-
             data.put(FirebaseID.like,"0"); //like의 개수를 0으로 초기화
 
             data.put(FirebaseID.writer_id,writer_id);
