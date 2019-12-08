@@ -112,7 +112,9 @@ public class nav extends AppCompatActivity {
         }
         //이메일 인증 버튼 구현
         verified_button = (Button) header.findViewById(R.id.btn_verified) ;
-        if(user.isEmailVerified()){//인증이 되어 있을때 인증상태를 verify->true로 저장
+
+        if(user.isEmailVerified()){
+
             verified_button.setEnabled(false);
             verified_button.setBackgroundColor(Color.argb(0,0,0,0));
             verified_button.setText("세종대학교 재학중");
