@@ -30,6 +30,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -133,6 +135,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
 
 
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
+
                                     }
                                     mAdapter = new PostAdapter(NoticeBoardActivity.this, mDatas);//mDatas라는 생성자를 넣어줌
                                     mPostRecyclerView.setAdapter(mAdapter);
@@ -140,6 +143,9 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                             }
                         });
     }
+
+
+
 
     @Override
     public void onClick(View v) {
