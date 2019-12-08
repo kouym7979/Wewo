@@ -1,5 +1,7 @@
 package com.example.finalp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -45,7 +47,7 @@ public class nav extends AppCompatActivity {
     private Button verified_button;
     private TextView textview_nickname;
     private TextView textview_email;
-    private String photoUrl;
+    private String photoUrl,user_id;
     private ImageView nav_imgView;
     private FirebaseAuth Auth = FirebaseAuth.getInstance();
     @Override
@@ -56,17 +58,6 @@ public class nav extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
-
-
-
-
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_notice, R.id.nav_license,
@@ -115,17 +106,13 @@ public class nav extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.getResult()!=null){
                                 textview_nickname.setText((String)task.getResult().getData().get(FirebaseID.nickname));
-                                //파이어베이스에 등록된 닉네임을 불러옴
                             }
                         }
                     });
         }
-
-
-
         //이메일 인증 버튼 구현
         verified_button = (Button) header.findViewById(R.id.btn_verified) ;
-        if(user.isEmailVerified()){
+        if(user.isEmailVerified()){//인증이 되어 있을때 인증상태를 verify->true로 저장
             verified_button.setEnabled(false);
             verified_button.setBackgroundColor(Color.argb(0,0,0,0));
             verified_button.setText("세종대학교 재학중");
@@ -140,7 +127,8 @@ public class nav extends AppCompatActivity {
 
                         if (user.isEmailVerified()) {
 
-                        } else {
+                        } else {//눌렀을때 즉 메일을 보낸것
+
                             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

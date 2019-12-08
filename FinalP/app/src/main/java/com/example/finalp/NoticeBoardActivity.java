@@ -30,6 +30,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,23 +64,9 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         mPostRecyclerView = findViewById(R.id.recyclerview);
         findViewById(R.id.edit_button).setOnClickListener(this);
         findViewById(R.id.search_btn).setOnClickListener(this);
-        Intent intent=getIntent();
-        post_n=intent.getStringExtra("post");
-        //if(post_n.equals("post1")){
+
+
             getSupportActionBar().setTitle("Board");
-       // }
-       /* else if(post_n.equals("post2")){
-            getSupportActionBar().setTitle("Find Korean Friends ");
-        }
-        else if(post_n.equals("post3")){
-            getSupportActionBar().setTitle("Korean Ettique");
-        }
-        else if(post_n.equals("post4")){
-            getSupportActionBar().setTitle("Question Board");
-        }
-        else if(post_n.equals("post5")){
-            getSupportActionBar().setTitle("Flea Market");
-        }*/
 
         Log.d("확인","여기는 노티스:"+post_n);
     }
@@ -101,6 +89,8 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     protected void onStart() {
+        Intent intent=getIntent();
+        post_n=intent.getStringExtra("post");
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
@@ -120,19 +110,14 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
-                                        Log.d("콘텐츠값", String.valueOf(shot));
-
-                                        Log.d("라이크값",String.valueOf(shot.get(FirebaseID.like)));
-                                        Log.d("다큐멘트값",String.valueOf(snap.getData().get(FirebaseID.like)));
                                         String like=String.valueOf(shot.get(FirebaseID.like));
                                         //int like = FirebaseID.like;
 
                                         String post_id=String.valueOf(shot.get(FirebaseID.post_id));
                                         String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
                                         Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id,like);
-
-
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
+
                                     }
                                     mAdapter = new PostAdapter(NoticeBoardActivity.this, mDatas);//mDatas라는 생성자를 넣어줌
                                     mPostRecyclerView.setAdapter(mAdapter);
@@ -140,6 +125,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                             }
                         });
     }
+
 
     @Override
     public void onClick(View v) {
