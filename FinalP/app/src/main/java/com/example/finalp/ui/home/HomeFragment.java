@@ -47,20 +47,7 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_home, container, false);
         context = container.getContext();
-
-        if(Auth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
-            mStore.collection("user").document(Auth.getCurrentUser().getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.getResult()!=null){
-                                verify=(String)task.getResult().getData().get(FirebaseID.verify);//현재 사용자 id
-                                //파이어베이스에 등록된 닉네임을 불러옴
-                            }
-                        }
-                    });
-        }
+        
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
                 @Override
                 public void onClick(View view) {
