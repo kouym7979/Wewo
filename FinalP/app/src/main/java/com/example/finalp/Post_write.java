@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,8 +50,9 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
     private EditText mTitle,mContents;//제목, 내용
     private String p_nickname;//게시판에 표기할 닉네잉 //이게 가져온 값을 저장하는 임시 변수
     private ImageButton post_photo;
+    private ProgressBar post_progressBar;
     private String photoUrl; //사진 저장 변수
-    private String post_num;
+    private String post_num,post_id,writer_id;
     private Uri uriProfileImage;
     private ImageView post_imageView;
     private String postImageUrl;
@@ -67,7 +69,7 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
         post_photo =findViewById(R.id.Post_photo);
         post_imageView = findViewById(R.id.post_imageview);
         post_imageView.setVisibility(View.INVISIBLE);
-
+        post_progressBar = findViewById(R.id.post_progressbar);
         if(mAuth.getCurrentUser()!=null){//UserInfo에 등록되어있는 닉네임을 가져오기 위해서
             mStore.collection("user").document(mAuth.getCurrentUser().getUid())// 여기 콜렉션 패스 경로가 중요해 보면 패스 경로가 user로 되어있어서
                     //우리 파이어베이스의 user 컬렉션의 정보를 가져올 수 있어. email, password, Uid(주민번호같은 거), nickname
@@ -81,6 +83,8 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                                 p_nickname=(String)task.getResult().getData().get(FirebaseID.nickname);//
                                 //닉네임 뿐만아니라 여기서 FirebaseID.password를 하면 비밀번호도 받아올 수 있음. 즉 원하는 것을 넣으면 됨
                                 //파이어베이스에 등록된 닉네임을 불러옴
+                                writer_id=(String)task.getResult().getData().get(FirebaseID.documentId);
+                                Log.d("확인","현재 사용자 uid입니다:"+writer_id);
                             }
                         }
                     });
@@ -139,12 +143,12 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
 
         if(uriProfileImage !=null)
         {
-           // progressBar.setVisibility(View.VISIBLE);
+            post_progressBar.setVisibility(View.VISIBLE);
             profileImageRef.putFile(uriProfileImage)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //progressBar.setVisibility(View.GONE);
+                            post_progressBar.setVisibility(View.GONE);
                             profileImageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
@@ -157,7 +161,8 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            //progressBar.setVisibility(View.GONE);
+
+                            post_progressBar.setVisibility(View.GONE);
 
                         }
                     });
@@ -178,22 +183,28 @@ public class Post_write extends AppCompatActivity implements View.OnClickListene
             String PostID=mStore.collection("Post").document().getId();//제목이 같아도 게시글이 겹치지않게
             Intent intent=getIntent();
             post_num=intent.getStringExtra("post");
+
             Log.d("확인","여기는 게시글 작성:"+post_num);
             Map<String,Object> data=new HashMap<>();
             data.put(FirebaseID.documentId,mAuth.getCurrentUser().getUid());//유저 고유번호
             data.put(FirebaseID.title,mTitle.getText().toString());//게시글제목
             data.put(FirebaseID.contents,mContents.getText().toString());//게시글 내용
             data.put(FirebaseID.timestamp, FieldValue.serverTimestamp());//파이어베이스 시간을 저장 그래야 게시글 정렬이 시간순가능
+
             data.put(FirebaseID.nickname,p_nickname);
             data.put(FirebaseID.p_photo,photoUrl);
-            //data.put(FirebaseID.nickname,p_nickname);
-            //data.put(FirebaseID.post_time,)
+
+            data.put(FirebaseID.post_id,PostID);//게시글 ID번호
             data.put(FirebaseID.post_num,post_num);
+            data.put(FirebaseID.like,"0"); //like의 개수를 0으로 초기화
+
+            data.put(FirebaseID.writer_id,writer_id);
+
             if(!TextUtils.isEmpty(postImageUrl))
             {
                 data.put(FirebaseID.post_photo,postImageUrl);
             }
-            mStore.collection("Post").add(data);//Post라는 테이블에 데이터를 입력하는것
+            mStore.collection("Post").document(PostID).set(data);//Post라는 테이블에 데이터를 입력하는것/ 문서 이름을 PostID로 등록
             finish();
         }
     }

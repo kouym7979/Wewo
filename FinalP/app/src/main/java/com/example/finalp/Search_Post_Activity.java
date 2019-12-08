@@ -62,6 +62,7 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                 if (queryDocumentSnapshots != null) {
                                     mDatas.clear();//미리 생성된 게시글들을 다시 불러오지않게 데이터를 한번 정리
                                     for (DocumentSnapshot snap : queryDocumentSnapshots.getDocuments()) {
+
                                         Map<String, Object> shot = snap.getData();
                                         String documentId = String.valueOf(shot.get(FirebaseID.documentId));
                                         String title=String.valueOf(shot.get(FirebaseID.title));
@@ -69,8 +70,14 @@ public class Search_Post_Activity extends AppCompatActivity implements View.OnCl
                                         String c_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo=String.valueOf(shot.get(FirebaseID.post_photo));
-                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo,post_n,post_photo);
+                                        //int like = (int) shot.get(FirebaseID.like);
+                                        String like=String.valueOf(shot.get(FirebaseID.like));
+                                        String post_id=String.valueOf(shot.get(FirebaseID.post_id));
+                                        String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
+                                        Post data = new Post(documentId, title, contents, c_nickname, p_photo,post_n,post_photo,post_id,writer_id,like);
+
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
+
                                     }
                                     mAdapter = new PostAdapter(Search_Post_Activity.this,mDatas);//mDatas라는 생성자를 넣어줌
                                     mPostRecyclerView.setAdapter(mAdapter);

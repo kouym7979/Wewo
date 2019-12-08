@@ -30,9 +30,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.Integer.valueOf;
 
 public class NoticeBoardActivity extends AppCompatActivity implements View.OnClickListener, PostAdapter.EventListener {
 
@@ -54,14 +58,16 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Foreign Post");
+
         search_edit=findViewById(R.id.edit_search);
         edit_s=search_edit.getText().toString();
         mPostRecyclerView = findViewById(R.id.recyclerview);
         findViewById(R.id.edit_button).setOnClickListener(this);
         findViewById(R.id.search_btn).setOnClickListener(this);
-        Intent intent=getIntent();
-        post_n=intent.getStringExtra("post");
+
+
+            getSupportActionBar().setTitle("Board");
+
         Log.d("확인","여기는 노티스:"+post_n);
     }
 
@@ -76,16 +82,6 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionItemSelected(MenuItem item) {
         Log.d("확인", "선택하세요");
         switch (item.getItemId()) {
-            case R.id.action_search: {
-                Log.d("확인", "클릭되었습니다");//이게안되누
-                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
-                Toast.makeText(getApplicationContext(), "Search Click", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            case R.id.btn1:{
-                startActivity(new Intent(NoticeBoardActivity.this,Search_Post_Activity.class));
-                Log.d("확인", "검색되었습니다");//이게안되누
-            }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -93,6 +89,8 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     protected void onStart() {
+        Intent intent=getIntent();
+        post_n=intent.getStringExtra("post");
         super.onStart();
         mDatas = new ArrayList<>();//
         mStore.collection("Post")//리사이클러뷰에 띄울 파이어베이스 테이블 경로
@@ -112,9 +110,14 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                                         String p_nickname = String.valueOf(shot.get(FirebaseID.nickname));
                                         String p_photo = String.valueOf(shot.get(FirebaseID.p_photo));
                                         String post_photo = String.valueOf(shot.get(FirebaseID.post_photo));
-                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo);
+                                        String like=String.valueOf(shot.get(FirebaseID.like));
+                                        //int like = FirebaseID.like;
 
+                                        String post_id=String.valueOf(shot.get(FirebaseID.post_id));
+                                        String writer_id=String.valueOf(shot.get(FirebaseID.writer_id));
+                                        Post data = new Post(documentId, title, contents, p_nickname, p_photo, post_n,post_photo,post_id,writer_id,like);
                                         mDatas.add(data);//여기까지가 게시글에 해당하는 데이터 적용
+
                                     }
                                     mAdapter = new PostAdapter(NoticeBoardActivity.this, mDatas);//mDatas라는 생성자를 넣어줌
                                     mPostRecyclerView.setAdapter(mAdapter);
@@ -122,6 +125,7 @@ public class NoticeBoardActivity extends AppCompatActivity implements View.OnCli
                             }
                         });
     }
+
 
     @Override
     public void onClick(View v) {

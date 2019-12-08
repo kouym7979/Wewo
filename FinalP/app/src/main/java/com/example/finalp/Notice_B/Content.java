@@ -13,16 +13,19 @@ public class Content {
     private String post_title;
     @ServerTimestamp
     private Date comment_date;
+    private String comment_post;
 
-    public Content(String doucumentId, String c_nickname, String comment, String post_position, String post_title, String c_photo) {
+
+
+    public Content(String doucumentId, String c_nickname, String comment, String post_position, String post_title, String c_photo, String comment_post) {
         this.c_nickname = c_nickname;
         this.c_photo = c_photo;
         this.comment = comment;
         this.documentId=doucumentId;
         this.post_position=post_position;
         this.post_title=post_title;
+        this.comment_post="comment_post";
     }
-
 
     public String getPost_title() {
         return post_title;
@@ -31,11 +34,6 @@ public class Content {
     public void setPost_title(String post_title) {
         this.post_title = post_title;
     }
-
-
-
-
-
 
     public String getPost_position() {
         return post_position;
@@ -87,21 +85,30 @@ public class Content {
         this.comment = comment;
     }
 
+    public String getComment_post() {
+        return comment_post;
+    }
+
+    public void setComment_post(String comment_post) {
+        this.comment_post = comment_post;
+    }
+
     public Content() {//빈생성자
 
     }
+
 
     @Override
     public String toString() {
         return "Content{" +
                 "c_nickname='" + c_nickname + '\'' +
-                "c_photo='" + c_photo + '\'' +
+                ", c_photo='" + c_photo + '\'' +
                 ", comment='" + comment + '\'' +
                 ", documentId='" + documentId + '\'' +
                 ", post_position='" + post_position + '\'' +
                 ", post_title='" + post_title + '\'' +
                 ", comment_date=" + comment_date +
+                ", comment_post='" + comment_post + '\'' +
                 '}';
     }
-
 }
