@@ -125,6 +125,7 @@ public class nav extends AppCompatActivity {
 
         //이메일 인증 버튼 구현
         verified_button = (Button) header.findViewById(R.id.btn_verified) ;
+        Log.d("인증?", String.valueOf(user.isEmailVerified()));
         if(user.isEmailVerified()){
             verified_button.setEnabled(false);
             verified_button.setBackgroundColor(Color.argb(0,0,0,0));
