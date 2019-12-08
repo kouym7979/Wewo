@@ -29,3 +29,7 @@ Wewo (외국인과 한국인 소통 커뮤니티 앱 만들기)
 
 ## WEWO 파일 구조도및 파일 설명
 [파일 구조도](https://github.com/kouym7979/Wewo/blob/master/md_files/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%ED%8C%8C%EC%9D%BC%20%EA%B5%AC%EC%A1%B0%EB%8F%84.md#%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0%EB%8F%84)
+
+## 최종 결과
+[최종 결과](https://github.com/kouym7979/Wewo/blob/master/md_files/final_result.md#%EC%B5%9C%EC%A2%85-%EA%B2%B0%EA%B3%BC-%ED%99%94%EB%A9%B4)  
+
