@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_home, container, false);
         context = container.getContext();
-        
+
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -33,7 +33,8 @@ import java.util.List;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+public class
+PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Post> datas;//뒷부분 추가
     private Context mcontext;
 
