@@ -1,5 +1,6 @@
 ﻿# 오픈소스SW 개론 프로젝트
 
+![wewo](https://github.com/kouym7979/Wewo/blob/master/FinalP/app/src/main/res/drawable/wewo.png)
 ## 참여자
 
 [허균](https://github.com/Kyun2da)  (Kyun2da)

@@ -37,6 +37,7 @@ public class FAQActivity extends AppCompatActivity implements noticefaqAdapter.M
                 "자신이 한국인인데 외국인 친구를 사귀고 싶다면 외국인 친구 사귀기 게시판을 이용하면 좋겠죠?"));
         dataList.add(new faqCardItem("글은 어떻게 쓰나요?", "메인화면에서 원하는 게시판에 들어가셔서 오른쪽 하단에 있는 핑크색 펜 버튼을 누르신 후 글을 작성하신 후에 SAVE버튼을 누르시면 글 업로드가 완료됩니다! 감사합니다."));
         dataList.add(new faqCardItem("비밀번호를 잃어버리면 어떻게 하나요?","로그인 화면에서 findPW를 누르신 후에 본인이 가입 시 기재하였던 이메일 주소를 기재하시고 찾기를 누르시면 됩니다!"));
+
         noticefaqAdapter adapter = new noticefaqAdapter(dataList);
         recyclerView.setAdapter(adapter);
 
